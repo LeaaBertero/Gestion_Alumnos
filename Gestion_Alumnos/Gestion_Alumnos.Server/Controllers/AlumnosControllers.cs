@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Gestion_Alumnos.BD.Data;
+using Gestion_Alumnos.Server.Repositorio;
 using Gestion_Alumnos.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,14 +12,14 @@ namespace Gestion_Alumnos.Server.Controllers
     [Route("api/Alumnos")]
     public class AlumnosControllers : ControllerBase
     {
-        private readonly Context context;
+        private readonly IAlumnoRepositorio repositorio;
         private readonly IMapper mapper;
 
         //constructor
         #region constructor
-        public AlumnosControllers(Context context, IMapper mapper)
+        public AlumnosControllers(IAlumnoRepositorio repositorio, IMapper mapper)
         {
-            this.context = context;
+            this.repositorio = repositorio;
             this.mapper = mapper;
         }
         #endregion
@@ -28,7 +29,7 @@ namespace Gestion_Alumnos.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Alumno>>> Get() 
         {
-            return await context.Alumnos.ToListAsync();
+            return await repositorio.Select();
         }
         #endregion
 
@@ -38,26 +39,10 @@ namespace Gestion_Alumnos.Server.Controllers
         public async Task<ActionResult<int>>Post(CrearAlumnoDTO entidadDTO) 
         {
             try
-            {
-                //Alumno entidad = new Alumno();
-                
-                //entidad.Nombre = entidadDTO.Nombre;
-                //entidad.Sexo = entidadDTO.Sexo;
-                //entidad.FechaNacimiento = entidadDTO.FechaNacimiento;
-                //entidad.Edad = entidadDTO.Edad;
-                //entidad.CUIL = entidadDTO.CUIL;
-                //entidad.Pais = entidadDTO.Pais;
-                //entidad.Provincia = entidadDTO.Provincia;
-                //entidad.TituloBase = entidadDTO.TituloBase;
-                //entidad.CUS = entidadDTO.CUS;
-                //entidad.Estado = entidadDTO.Estado;
-
+            {             
                 Alumno entidad = mapper.Map<Alumno>(entidadDTO);
-
-                
-                context.Alumnos.Add(entidad);
-                await context.SaveChangesAsync();
-                return entidad.Id;
+                                             
+                return await repositorio.Insert(entidad);
             }
             catch (Exception err)
             {
@@ -67,6 +52,6 @@ namespace Gestion_Alumnos.Server.Controllers
         }
         #endregion
 
-        
     }
 }
+        
