@@ -25,65 +25,64 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         #region Clave foranea Carrera
         public Carrera Carrera { get; set; }
         #endregion
-        
-        //Atribitos de la tabla
-        #region Nombre
+
+        //Atributos de la tabla
+        #region Atributos
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [MaxLength(150, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? Nombre { get; set; } //modificado con signo de pregunta
-        #endregion
-
-        #region Sexo
+        
+        
         [Required(ErrorMessage = "Sexo")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? Sexo { get; set; } //modificado con signo de pregunta
-        #endregion
+        
 
-        #region FechaNacimiento
+        
         [Required(ErrorMessage = "Ingrese la fecha de nacimiento")]
         public DateOnly FechaNacimiento { get; set; }
-        #endregion
+        
 
-        #region Edad
+        
         [Required(ErrorMessage = "Ingrese la edad")]
         public int Edad { get; set; }
-        #endregion
+        
 
-        #region Cuil
+        
         [Required(ErrorMessage = "Ingrese el  Nro  de Cuil")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? CUIL { get; set; } //modificado con signo de pregunta
-        #endregion
+        
 
-        #region Pais
+        
         [Required(ErrorMessage = "Nacionalidad")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? Pais { get; set; } //modificado con signo de pregunta
-        #endregion
+        
 
-        #region Provincia
+        
         [Required(ErrorMessage = "Provincia")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? Provincia { get; set; } //modificacion con signo de pregunta
 
-        #endregion
+        
 
-        #region Titulo Base
+       
         [Required(ErrorMessage = "Titulo Base")] //corregir el titulo
         [MaxLength(60, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? TituloBase { get; set; }
-        #endregion
+        
 
-        #region Cus
+        
         [Required(ErrorMessage = "CUS")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? CUS { get; set; }
-        #endregion
+      
 
-        #region Estado
+        
         [Required(ErrorMessage = "El estado de la materia es obligatorio")]
         public string? Estado { get; set; } //modificado con signo de pregunta
-        #endregion
+        
 
         #region comentarios de la tabla
         //[Required(ErrorMessage = "El departamento es obligatorio")]
@@ -125,7 +124,10 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         #region Lista de alumnos que cursan la materia
         public List<CursadoMateria> MateriasCursadas { get; set; } = new List<CursadoMateria>();
         #endregion
+
+        #endregion
     }
+
 }
 
         
