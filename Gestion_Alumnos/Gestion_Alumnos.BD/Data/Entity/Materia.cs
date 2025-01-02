@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
     //los indices de la tabla esta mal, le falta la clave primaria de la tabla (No entiendo !!!!!!!!!!!!)
+    #region Indices
     [Index(nameof(Nombre), nameof(ResolucionMinisterial), Name = "Materia_UQ", IsUnique = true)]
     [Index(nameof(Nombre), Name = "Nombre_Formato_Formacion_ResolucionMinisterial_Anno", IsUnique = false)]
-   
+    #endregion
     public class Materia : EntityBase
     {
+        #region Atributos
         [Required(ErrorMessage = "El nombre de la materia es obligatorio")]
         [MaxLength(50, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string? Nombre { get; set; }
@@ -33,5 +35,6 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 
         [Required(ErrorMessage = "El año de la materia es obligatorio")]
         public int Anno { get; set; }
+        #endregion
     }
 }
