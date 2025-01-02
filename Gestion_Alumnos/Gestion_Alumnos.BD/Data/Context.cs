@@ -10,5 +10,11 @@ namespace Gestion_Alumnos.BD.Data
     public class Context : DbContext
     {
 
+
+        #region constructor de la base de datos
+        public Context(DbContextOptions options) : base(options)
+        {
+        }
+        #endregion
     }
 }

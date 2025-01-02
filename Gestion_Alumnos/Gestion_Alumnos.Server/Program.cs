@@ -1,3 +1,4 @@
+using Gestion_Alumnos.BD.Data;
 using Microsoft.EntityFrameworkCore;
 
 //-------------------------------------------------------------------------------
