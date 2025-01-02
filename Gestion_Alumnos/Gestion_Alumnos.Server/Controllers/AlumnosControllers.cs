@@ -63,7 +63,7 @@ namespace Gestion_Alumnos.Server.Controllers
         //    {
         //        return NotFound("No existe el alumno buscado.");    
         //    }
-            
+
         //    Dammy.Nombre = entidad.Nombre;
         //    Dammy.Sexo = entidad.Sexo;
         //    Dammy.FechaNacimiento = entidad.FechaNacimiento;
@@ -90,5 +90,25 @@ namespace Gestion_Alumnos.Server.Controllers
         //    return Ok();
         //}
         #endregion
+
+        //Método delete
+        //#region Delete
+        //public async Task<ActionResult> Delete(int id) 
+        //{
+        //    var existe = await context.Alumnos.AnyAsync(x => x.Id == id);
+
+        //    if (!existe) 
+        //    {
+        //        return NotFound($"El alumno {id} no existe");
+        //    }
+             
+        //    Alumno entidadBorrar = new Alumno();
+        //    entidadBorrar.Id = id;
+
+        //    context.Remove(entidadBorrar);
+
+        //    return Ok();
+        //}
+        //#endregion
     }
 }

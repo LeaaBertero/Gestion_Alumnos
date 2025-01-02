@@ -5,21 +5,18 @@ using Proyecto_Alumnos.BD.Data.Entidades;
 
 namespace Gestion_Alumnos.Server.Controllers
 {
-
     [ApiController]
     [Route("api/Materia")]
     public class MateriaControllers : ControllerBase
     {
         private readonly Context context;
 
-        //constructor
         #region constructor
         public MateriaControllers(Context context)
         {
             this.context = context;
         }
         #endregion
-
 
         //Método Get
         #region Get
@@ -48,5 +45,8 @@ namespace Gestion_Alumnos.Server.Controllers
             }
         }
         #endregion
+
+
+        
     }
 }
