@@ -12,7 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//conexion con la base de datos
+#region Context
 builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
+#endregion
+
+
+//Servicio de AutoMapper
+#region AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+#endregion
 
 //--------------------------------------------------------------------------------
 //construcción de la aplicación

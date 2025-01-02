@@ -1,4 +1,5 @@
-﻿using Gestion_Alumnos.BD.Data;
+﻿using AutoMapper;
+using Gestion_Alumnos.BD.Data;
 using Gestion_Alumnos.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ namespace Gestion_Alumnos.Server.Controllers
     public class MateriaControllers : ControllerBase
     {
         private readonly Context context;
+        private readonly IMapper mapper;
 
         #region constructor
-        public MateriaControllers(Context context)
+        public MateriaControllers(Context context, IMapper mapper )
         {
             this.context = context;
+            this.mapper = mapper;
         }
         #endregion
 
@@ -35,14 +38,15 @@ namespace Gestion_Alumnos.Server.Controllers
         {
             try
             {
-                Materia entidad = new Materia();
+                //Materia entidad = new Materia();
 
-                entidad.Nombre = entidadDTO.Nombre;
-                entidad.Formato = entidadDTO.Formato;
-                entidad.Formacion = entidadDTO.Formacion;
-                entidad.ResolucionMinisterial = entidadDTO.ResolucionMinisterial;
-                entidad.Anno = entidadDTO.Anno;
+                //entidad.Nombre = entidadDTO.Nombre;
+                //entidad.Formato = entidadDTO.Formato;
+                //entidad.Formacion = entidadDTO.Formacion;
+                //entidad.ResolucionMinisterial = entidadDTO.ResolucionMinisterial;
+                //entidad.Anno = entidadDTO.Anno;
 
+                Materia entidad = mapper.Map<Materia>(entidadDTO);
 
 
                 context.Materias.Add(entidad);

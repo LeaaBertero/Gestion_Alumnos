@@ -1,4 +1,5 @@
-﻿using Gestion_Alumnos.BD.Data;
+﻿using AutoMapper;
+using Gestion_Alumnos.BD.Data;
 using Gestion_Alumnos.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +12,14 @@ namespace Gestion_Alumnos.Server.Controllers
     public class AlumnosControllers : ControllerBase
     {
         private readonly Context context;
+        private readonly IMapper mapper;
 
         //constructor
         #region constructor
-        public AlumnosControllers(Context context)
+        public AlumnosControllers(Context context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         #endregion
 
@@ -36,18 +39,20 @@ namespace Gestion_Alumnos.Server.Controllers
         {
             try
             {
-                Alumno entidad = new Alumno();
+                //Alumno entidad = new Alumno();
                 
-                entidad.Nombre = entidadDTO.Nombre;
-                entidad.Sexo = entidadDTO.Sexo;
-                entidad.FechaNacimiento = entidadDTO.FechaNacimiento;
-                entidad.Edad = entidadDTO.Edad;
-                entidad.CUIL = entidadDTO.CUIL;
-                entidad.Pais = entidadDTO.Pais;
-                entidad.Provincia = entidadDTO.Provincia;
-                entidad.TituloBase = entidadDTO.TituloBase;
-                entidad.CUS = entidadDTO.CUS;
-                entidad.Estado = entidadDTO.Estado;
+                //entidad.Nombre = entidadDTO.Nombre;
+                //entidad.Sexo = entidadDTO.Sexo;
+                //entidad.FechaNacimiento = entidadDTO.FechaNacimiento;
+                //entidad.Edad = entidadDTO.Edad;
+                //entidad.CUIL = entidadDTO.CUIL;
+                //entidad.Pais = entidadDTO.Pais;
+                //entidad.Provincia = entidadDTO.Provincia;
+                //entidad.TituloBase = entidadDTO.TituloBase;
+                //entidad.CUS = entidadDTO.CUS;
+                //entidad.Estado = entidadDTO.Estado;
+
+                Alumno entidad = mapper.Map<Alumno>(entidadDTO);
 
                 
                 context.Alumnos.Add(entidad);
