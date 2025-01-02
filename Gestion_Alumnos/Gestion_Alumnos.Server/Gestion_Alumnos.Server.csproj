@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gestion_Alumnos.BD\Gestion_Alumnos.BD.csproj" />
+    <ProjectReference Include="..\Gestion_Alumnos.Shared\Gestion_Alumnos.Shared.csproj" />
   </ItemGroup>
 
 </Project>

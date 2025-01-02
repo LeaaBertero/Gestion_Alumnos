@@ -1,4 +1,5 @@
 ﻿using Gestion_Alumnos.BD.Data;
+using Gestion_Alumnos.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Alumnos.BD.Data.Entidades;
@@ -31,10 +32,24 @@ namespace Gestion_Alumnos.Server.Controllers
         //Método Post
         #region Post
         [HttpPost]
-        public async Task<ActionResult<int>>Post(Alumno entidad) 
+        public async Task<ActionResult<int>>Post(CrearAlumnoDTO entidadDTO) 
         {
             try
             {
+                Alumno entidad = new Alumno();
+                
+                entidad.Nombre = entidadDTO.Nombre;
+                entidad.Sexo = entidadDTO.Sexo;
+                entidad.FechaNacimiento = entidadDTO.FechaNacimiento;
+                entidad.Edad = entidadDTO.Edad;
+                entidad.CUIL = entidadDTO.CUIL;
+                entidad.Pais = entidadDTO.Pais;
+                entidad.Provincia = entidadDTO.Provincia;
+                entidad.TituloBase = entidadDTO.TituloBase;
+                entidad.CUS = entidadDTO.CUS;
+                entidad.Estado = entidadDTO.Estado;
+
+                
                 context.Alumnos.Add(entidad);
                 await context.SaveChangesAsync();
                 return entidad.Id;
@@ -47,68 +62,6 @@ namespace Gestion_Alumnos.Server.Controllers
         }
         #endregion
 
-        //Método Put
-        #region Put
-        //[HttpPut("{id:int}")]
-        //public async Task<ActionResult> Put(int id, [FromBody] Alumno entidad) 
-        //{
-        //    if (id != entidad.Id)
-        //    {
-        //        return BadRequest("Datos incorrectos");
-        //    }
-
-        //    var Dammy = await context.Alumnos.Where(e => e.Id == id).FirstOrDefaultAsync();
-
-        //    if (Dammy == null) 
-        //    {
-        //        return NotFound("No existe el alumno buscado.");    
-        //    }
-
-        //    Dammy.Nombre = entidad.Nombre;
-        //    Dammy.Sexo = entidad.Sexo;
-        //    Dammy.FechaNacimiento = entidad.FechaNacimiento;
-        //    Dammy.Edad = entidad.Edad;
-        //    Dammy.CUIL = entidad.CUIL;
-        //    Dammy.Pais = entidad.Pais;
-        //    Dammy.Provincia = entidad.Provincia;
-        //    Dammy.TituloBase = entidad.TituloBase;
-        //    Dammy.CUS = entidad.CUS;
-        //    Dammy.Estado = entidad.Estado;
-
-        //    try
-        //    {
-        //        context.Alumnos.Update(Dammy);
-        //        await context.SaveChangesAsync();
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        return BadRequest(e.Message);   
-        //        //throw;
-        //    }
-
-        //    return Ok();
-        //}
-        #endregion
-
-        //Método delete
-        //#region Delete
-        //public async Task<ActionResult> Delete(int id) 
-        //{
-        //    var existe = await context.Alumnos.AnyAsync(x => x.Id == id);
-
-        //    if (!existe) 
-        //    {
-        //        return NotFound($"El alumno {id} no existe");
-        //    }
-             
-        //    Alumno entidadBorrar = new Alumno();
-        //    entidadBorrar.Id = id;
-
-        //    context.Remove(entidadBorrar);
-
-        //    return Ok();
-        //}
-        //#endregion
+        
     }
 }
