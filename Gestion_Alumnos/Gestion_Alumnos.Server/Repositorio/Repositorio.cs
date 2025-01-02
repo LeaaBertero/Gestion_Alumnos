@@ -11,7 +11,8 @@ namespace Gestion_Alumnos.Server.Repositorio
     //clase especializada en hacer un CRUD
     //sobre uma tabla cualquiera de la base de datos
     #region Repositorio
-    public class Repositorio<E> : IRepositorio<E> where E : class, IEntityBase
+    public class Repositorio<E> : IRepositorio<E> 
+        where E : class, IEntityBase
     {
         private readonly Context context;
 
@@ -65,7 +66,7 @@ namespace Gestion_Alumnos.Server.Repositorio
 
         //    try
         //    {
-        //        context.Set<E>().Update(entidad);
+        //        context.Set<E>().Update(entidad); 
         //        await context.SaveChangesAsync();
         //        return true;
         //    }
