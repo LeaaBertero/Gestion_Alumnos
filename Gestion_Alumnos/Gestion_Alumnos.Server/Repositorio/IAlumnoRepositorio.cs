@@ -2,8 +2,10 @@
 
 namespace Gestion_Alumnos.Server.Repositorio
 {
+    #region Interfáz Alumno
     public interface IAlumnoRepositorio : IRepositorio<Alumno>
     {
 
     }
+    #endregion
 }
