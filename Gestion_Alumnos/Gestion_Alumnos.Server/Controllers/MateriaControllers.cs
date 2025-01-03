@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Gestion_Alumnos.BD.Data;
+using Gestion_Alumnos.Server.Repositorio;
 using Gestion_Alumnos.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,14 +12,16 @@ namespace Gestion_Alumnos.Server.Controllers
     [Route("api/Materia")]
     public class MateriaControllers : ControllerBase
     {
-        private readonly Context context;
+       
+        private readonly IMateriaRepositorio repositorio;
         private readonly IMapper mapper;
 
         #region constructor
-        public MateriaControllers(Context context, IMapper mapper )
+        public MateriaControllers(IMateriaRepositorio repositorio)//, IMapper mapper )
         {
-            this.context = context;
-            this.mapper = mapper;
+           
+            this.repositorio = repositorio;
+            //this.mapper = mapper;
         }
         #endregion
 
@@ -27,41 +30,31 @@ namespace Gestion_Alumnos.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Materia>>> Get()
         {
-            return await context.Materias.ToListAsync();
+            return await repositorio.Select(); ;
         }
         #endregion
 
         //Método Post
         #region Post
         [HttpPost]
-        public async Task<ActionResult<int>> Post(CrearMateriaDTO entidadDTO)
+        public async Task<ActionResult<int>> Post(Materia entidad)
         {
             try
             {
-                //Materia entidad = new Materia();
-
-                //entidad.Nombre = entidadDTO.Nombre;
-                //entidad.Formato = entidadDTO.Formato;
-                //entidad.Formacion = entidadDTO.Formacion;
-                //entidad.ResolucionMinisterial = entidadDTO.ResolucionMinisterial;
-                //entidad.Anno = entidadDTO.Anno;
-
-                Materia entidad = mapper.Map<Materia>(entidadDTO);
-
-
-                context.Materias.Add(entidad);
-                await context.SaveChangesAsync();
-                return entidad.Id;
+                return await repositorio.Insert(entidad);
             }
             catch (Exception err)
             {
-
                 return BadRequest(err.Message);
             }
         }
         #endregion
+    }
+}
+
+
+                
+
 
 
         
-    }
-}
