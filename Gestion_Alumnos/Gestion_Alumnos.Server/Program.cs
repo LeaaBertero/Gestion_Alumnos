@@ -1,5 +1,6 @@
 using Gestion_Alumnos.BD.Data;
 using Gestion_Alumnos.Server.Repositorio;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -13,6 +14,10 @@ builder.Services.AddControllers().AddJsonOptions(
     x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 #endregion
 
+#region Servicios de construccion Razor
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+#endregion
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -51,10 +56,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//----------------------------------------------------------------------------------------------------------
 app.UseHttpsRedirection();
+app.UseBlazorFrameworkFiles(); //Nota: tuve que bajar la version por que la ultima version no es compatible,
+app.UseStaticFiles();          //para poder asignarle el using
+app.UseRouting();
+app.MapRazorPages();
+//-----------------------------------------------------------------------------------------------------------
 
 app.UseAuthorization();
 
 app.MapControllers();
 
+//Pagina principal del sitio web
+app.MapFallbackToFile("index.html");
 app.Run();
