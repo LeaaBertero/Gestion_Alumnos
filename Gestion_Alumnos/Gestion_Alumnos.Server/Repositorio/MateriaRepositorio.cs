@@ -3,11 +3,11 @@ using Proyecto_Alumnos.BD.Data.Entidades;
 
 namespace Gestion_Alumnos.Server.Repositorio
 {
-    public class AlumnoRepositorio : Repositorio<Alumno>, IAlumnoRepositorio
+    public class MateriaRepositorio : Repositorio<Materia>, IMateriaRepositorio
     {
         private readonly Context context;
 
-        public AlumnoRepositorio(Context context) : base(context)
+        public MateriaRepositorio(Context context) : base(context)
         {
             this.context = context;
         }

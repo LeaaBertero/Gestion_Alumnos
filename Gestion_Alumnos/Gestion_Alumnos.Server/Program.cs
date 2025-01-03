@@ -36,6 +36,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IAlumnoRepositorio, AlumnoRepositorio>();
 #endregion
 
+#region constructor de la interfaz Materia
+builder.Services.AddScoped<IMateriaRepositorio, MateriaRepositorio>();
+#endregion
+
 //--------------------------------------------------------------------------------
 //construcción de la aplicación
 var app = builder.Build();
