@@ -49,6 +49,8 @@ namespace Gestion_Alumnos.Server.Repositorio
         }
         #endregion
 
+        //codigo inutilizado
+        #region codigo comentado
         //Update Repositorio
         //#region Update Repositorio
         //public async Task<bool> Update(int id, E entidad) 
@@ -107,7 +109,7 @@ namespace Gestion_Alumnos.Server.Repositorio
         //    await context.SaveChangesAsync();
         //    return Ok();
         //}
-        //#endregion
+        #endregion
     }
     #endregion
 }
