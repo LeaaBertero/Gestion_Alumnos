@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //conexion con la base de datos
-#region Context
+#region Conexion con la base de datos
 builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
 #endregion
 
