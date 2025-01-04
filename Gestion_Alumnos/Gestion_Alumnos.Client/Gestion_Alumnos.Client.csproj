@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Gestion_Alumnos.Shared\Gestion_Alumnos.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Imagenes\" />
+  </ItemGroup>
+
 </Project>
