@@ -2,7 +2,7 @@
 
 namespace Gestion_Alumnos.Client.Servicios
 {
-    public class HttpServicio
+    public class HttpServicio : IHttpServicio
     {
         private readonly HttpClient http;
 
@@ -13,15 +13,15 @@ namespace Gestion_Alumnos.Client.Servicios
         }
         #endregion
 
-        public async Task<HttpRespuesta<T>> Get<T>(string url) 
+        public async Task<HttpRespuesta<T>> Get<T>(string url)
         {
             var response = await http.GetAsync(url);
 
-            if (response.IsSuccessStatusCode) 
+            if (response.IsSuccessStatusCode)
             {
                 var respuesta = await DeScerializar<T>(response);
                 return new HttpRespuesta<T>(respuesta, false, response);
-            }   
+            }
             else
             {
                 return new HttpRespuesta<T>(default, true, response);
@@ -31,7 +31,7 @@ namespace Gestion_Alumnos.Client.Servicios
         private async Task<T?> DeScerializar<T>(HttpResponseMessage response)
         {
             var respuestaStr = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(respuestaStr, 
+            return JsonSerializer.Deserialize<T>(respuestaStr,
                 new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
     }
