@@ -2,63 +2,90 @@
 @inject IHttpServicio http
 
 <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Lista Alumnos</title>
-        
-        @* enlace de css *@
-        <link href="./css/Alumnos.css" rel="stylesheet" />
-    </head>
-    
-    <body>
+<html>
+<head>
+    <title>Lista Alumnos</title>
 
-        <header class="back">
-            <h1 class="text-center">Lista de alumnos</h1>
-        </header>
-        
-        <main>
-            @* lista  *@
-            <table>
-            
+    @* enlace de css *@
+    <link href="./css/Alumnos.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <header class="back">
+        <h1 class="text-center">Lista de alumnos</h1>
+    </header>
+
+    <main>
+        @* lista  *@
+        <table>
+
+            <tr>
+
+                <th>Nombre</th>
+                <th>Sexo</th>
+                <th>FechaNacimiento</th>
+                <th>Edad</th>
+                <th>Cuil</th>
+                <th>Pais</th>
+                <th>Provincia</th>
+                <th>TituloBase</th>
+                <th>Cus</th>
+                <th>Estado</th>
+
+            </tr>
+
+           @*  @foreach (var item in listaAlumnos)
+            {
                 <tr>
-                
-                    <th>Nombre</th>
-                    <th>Sexo</th>
-                    <th>FechaNacimiento</th>
-                    <th>Edad</th>
-                    <th>Cuil</th>
-                    <th>Pais</th>
-                    <th>Provincia</th>
-                    <th>TituloBase</th>
-                    <th>Cus</th>
-                    <th>Estado</th>
-                
+                    <td>@item.Nombre</td>
+                    <td>@item.Sexo</td>
+                    <td>@item.FechaNacimiento</td>
+                    <td>@item.Edad</td>
+                    <td>@item.CUIL</td>
+                    <td>@item.Pais</td>
+                    <td>@item.Provincia</td>
+                    <td>@item.TituloBase</td>
+                    <td>@item.CUS</td>
+                    <td>@item.Estado</td>
                 </tr>
-                
-            </table>
-                
-                
-                
-                
-                
-                
-                
-                
 
-                    
-                    
+            } *@
 
+        </table>
 
-        </main>
-        
-        <footer>
+    </main>
 
-        </footer>
+    <footer>
 
-    
-    </body>
-    </html>    
+    </footer>
+
+</body>
+
+</html>    
 
 @code {
+    List<Alumno> listaAlumnos;
 
+    // protected override async Task OnInitializedAsync() 
+    // {
+    //     await base.OnInitializedAsync();
+    //     await Leer();
+    // }
+
+    // private async Task Leer() 
+    // {
+    //     var respuesta = 
+    // }
 }
+                
+                
+                
+                
+                
+                
+                
+                
+
+                    
+
