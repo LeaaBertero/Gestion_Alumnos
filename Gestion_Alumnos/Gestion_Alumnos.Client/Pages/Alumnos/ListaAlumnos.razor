@@ -38,55 +38,67 @@
 
             </tr>
 
-            @if (listaAlumnos == null)
+            @if (Mensaje == "")
             {
-                <p class="btn btn-primary">Buscando...</p>
-            }
-            else 
-            {
-                @foreach (var item in listaAlumnos)
+                @if (listaAlumnos == null)
                 {
-                    <tr>
-                        <td>@item.Nombre</td>
-                        <td>@item.Sexo</td>
-                        <td>@item.FechaNacimiento</td>
-                        <td>@item.Edad</td>
-                        <td>@item.CUIL</td>
-                        <td>@item.Pais</td>
-                        <td>@item.Provincia</td>
-                        <td>@item.TituloBase</td>
-                        <td>@item.CUS</td>
-                        <td>@item.Estado</td>
-                    </tr>
-
+                    <p class="btn btn-primary">Buscando...</p>
+                }
+                else if (listaAlumnos.Count == 0)
+                {
+                    <p>No existe la lista de alumnos solicitada</p>
+                }
+                else
+                {
+                    @foreach (var item in listaAlumnos)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.Sexo</td>
+                            <td>@item.FechaNacimiento</td>
+                            <td>@item.Edad</td>
+                            <td>@item.CUIL</td>
+                            <td>@item.Pais</td>
+                            <td>@item.Provincia</td>
+                            <td>@item.TituloBase</td>
+                            <td>@item.CUS</td>
+                            <td>@item.Estado</td>
+                        </tr>
+                    }
                 }
             }
+            else
+            {
+                <p>Error: @Mensaje</p>
+            }
+
+
 
         </table>
 
     </main>
 
     <footer>
-
     </footer>
 
 
 
 </body>
 
-</html>    
+</html>
 
 @code {
     List<Alumno> listaAlumnos;
+    string Mensaje = "";
 
     // Task == void (Nota retorna nada)
-    protected override async Task OnInitializedAsync() 
+    protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         await Leer();
     }
 
-    private async Task Leer() 
+    private async Task Leer()
     {
         var resp = await http.Get<List<Alumno>>("api/Alumnos");
         string Mensaje = "";
@@ -96,25 +108,25 @@
             listaAlumnos = resp.respuesta;
 
         }
-        else 
+        else
         {
-            Mensaje = "Error"; 
+            Mensaje = await resp.ObtenerError();
         }
 
-    }  
+    }
 
-    
+
 }
 
-   
-                
-                
-                
-                
-                
-                
-                
-                
 
-                    
+
+
+
+
+
+
+
+
+
+
 
