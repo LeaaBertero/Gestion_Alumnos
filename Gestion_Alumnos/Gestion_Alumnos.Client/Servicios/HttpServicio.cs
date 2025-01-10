@@ -40,16 +40,16 @@ namespace Gestion_Alumnos.Client.Servicios
                                 Encoding.UTF8,
                                 "application/json");
 
-            var resp = await http.PostAsync(url, enviarContent);
+            var response = await http.PostAsync(url, enviarContent);
            
-            if (resp.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                var respuesta = await DeScerializar<object>(resp);
-                return new HttpRespuesta<object>(respuesta, false, resp);
+                var respuesta = await DeScerializar<object>(response);
+                return new HttpRespuesta<object>(respuesta, false, response);
             }
             else
             {
-                return new HttpRespuesta<object>(default, true, resp);
+                return new HttpRespuesta<object>(default, true, response);
             }
         }
         #endregion
