@@ -1,15 +1,15 @@
 ﻿@page "/api/Alumnos"
 @inject IHttpServicio http
 
-<!DOCTYPE html>
+@* <!DOCTYPE html>
 <html>
 <head>
     <title>Lista Alumnos</title>
 
-    @* enlace de css *@
+    
     <link href="./css/ListaAlumnos.css" rel="stylesheet" />
 
-    @* bootstrap *@
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -22,7 +22,7 @@
     </header> 
 
     <main>
-        @*Recorre una lista de Alumnos *@
+        
         <table>
 
             <tr>
@@ -74,7 +74,7 @@
                 <p>Error: @Mensaje</p>
             }
 
-            @* CONTINUAR CON LA CLASE DEÑ 27 ago 2024 (Servicio Post) *@
+            
 
         </table>
 
@@ -87,7 +87,97 @@
 
 </body>
 
+</html> *@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Alumnos</title>
+
+    <!-- Enlace de CSS personalizado -->
+    <link href="./css/ListaAlumnos.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+   
+</head>
+
+<body>
+
+    <header>
+        <h1 class="text-center shadow mb-5">Lista de alumnos</h1>
+        <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Cargar nuevo alumno</a>
+    </header>
+
+    <main>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Sexo</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Edad</th>
+                    <th>CUIL</th>
+                    <th>País</th>
+                    <th>Provincia</th>
+                    <th>Título Base</th>
+                    <th>CUS</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Mensaje == "")
+                {
+                    @if (listaAlumnos == null)
+                    {
+                        <tr><td colspan="10" class="text-center">Buscando...</td></tr>
+                    }
+                    else if (listaAlumnos.Count == 0)
+                    {
+                        <tr><td colspan="10" class="text-center">No existe la lista de alumnos solicitada</td></tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in listaAlumnos)
+                        {
+                            <tr>
+                                <td>@item.Nombre</td>
+                                <td>@item.Sexo</td>
+                                <td>@item.FechaNacimiento</td>
+                                <td>@item.Edad</td>
+                                <td>@item.CUIL</td>
+                                <td>@item.Pais</td>
+                                <td>@item.Provincia</td>
+                                <td>@item.TituloBase</td>
+                                <td>@item.CUS</td>
+                                <td>@item.Estado</td>
+                            </tr>
+                        }
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="10" class="text-center text-danger">Error: @Mensaje</td></tr>
+                }
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
 </html>
+
 
 @code {
     List<Alumno> listaAlumnos;

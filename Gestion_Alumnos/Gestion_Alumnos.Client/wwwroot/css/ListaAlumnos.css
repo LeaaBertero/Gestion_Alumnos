@@ -1,1 +1,46 @@
-﻿
+﻿body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+header h1 {
+    color: #ffffff;
+    background-color: #343a40;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+td:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    a.btn {
+        font-size: 0.8em;
+    }
+}
