@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 
 namespace Gestion_Alumnos.Client.Servicios
 {
@@ -13,6 +14,7 @@ namespace Gestion_Alumnos.Client.Servicios
         }
         #endregion
 
+        #region Get HttpRespuesta
         public async Task<HttpRespuesta<T>> Get<T>(string url)
         {
             var response = await http.GetAsync(url);
@@ -27,12 +29,38 @@ namespace Gestion_Alumnos.Client.Servicios
                 return new HttpRespuesta<T>(default, true, response);
             }
         }
+        #endregion
 
+        #region Post HttpRespuesta
+        public async Task<HttpRespuesta<object>> Post<T>(string url, T entidad)
+        {
+            var enviarJson = JsonSerializer.Serialize(entidad);
+
+            var enviarContent = new StringContent(enviarJson,
+                                Encoding.UTF8,
+                                "application/json");
+
+            var resp = await http.PostAsync(url, enviarContent);
+           
+            if (resp.IsSuccessStatusCode)
+            {
+                var respuesta = await DeScerializar<object>(resp);
+                return new HttpRespuesta<object>(respuesta, false, resp);
+            }
+            else
+            {
+                return new HttpRespuesta<object>(default, true, resp);
+            }
+        }
+        #endregion
+
+        #region Descerializar
         private async Task<T?> DeScerializar<T>(HttpResponseMessage response)
         {
             var respuestaStr = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(respuestaStr,
                 new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
+        #endregion
     }
 }

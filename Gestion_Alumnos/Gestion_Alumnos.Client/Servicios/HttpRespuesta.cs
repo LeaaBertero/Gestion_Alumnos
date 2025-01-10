@@ -16,7 +16,7 @@
         }
         #endregion
 
-
+        #region Método Obtener Error
         public async Task<string> ObtenerError() 
         {
             if (!err) 
@@ -41,6 +41,7 @@
                     return HttpResponseMessage.Content.ReadAsStringAsync().Result;
             }
         }
+        #endregion
 
     }
 }
