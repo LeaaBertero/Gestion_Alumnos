@@ -1,4 +1,4 @@
-﻿@page "/api/ListaAlumnos/crear"
+﻿@* @page "/api/ListaAlumnos/crear"
 @inject IHttpServicio http
 @inject NavigationManager navigationManager
 
@@ -10,12 +10,12 @@
 
 <body>
 
-    @* cabecera *@
+   
     <header>
         <h1>Hola, acá podes cargar un alumno nuevo</h1>
     </header>
 
-    @* cuerpo *@
+   
     <main>
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
@@ -29,10 +29,6 @@
                 </div>
 
             </div>
-        </EditForm> 
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Sexo</label>
@@ -43,10 +39,6 @@
                 </div>
 
             </div>
-        </EditForm> 
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>fecha de nacimiento</label>
@@ -57,10 +49,6 @@
                 </div>
 
             </div>
-        </EditForm>
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Edad</label>
@@ -71,10 +59,6 @@
                 </div>
 
             </div>
-        </EditForm>  
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Cuil</label>
@@ -85,10 +69,6 @@
                 </div>
 
             </div>
-        </EditForm>
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>País</label>
@@ -99,10 +79,6 @@
                 </div>
 
             </div>
-        </EditForm> 
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Provincia</label>
@@ -113,10 +89,6 @@
                 </div>
 
             </div>
-        </EditForm> 
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Título Base</label>
@@ -127,10 +99,6 @@
                 </div>
 
             </div>
-        </EditForm>
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Cus</label>
@@ -141,10 +109,6 @@
                 </div>
 
             </div>
-        </EditForm> 
-
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label>Estado</label>
@@ -155,15 +119,20 @@
                 </div>
 
             </div>
-        </EditForm>
-
-        <button class="btn btn-success" type="submit">Cargar datos</button>
-        <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
 
 
+            <div>
+                <button class="btn btn-success" type="submit">Cargar datos</button>
+                <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+            </div>
+
+        </EditForm> 
+
+       
+       
     </main>
 
-    @* pié de página *@
+    
     <footer>
 
     </footer>
@@ -193,4 +162,120 @@
     }
 
 
+}
+ *@
+
+    @page "/api/ListaAlumnos/crear"
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear lista alumnos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    @* cabecera *@
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Hola, acá podés cargar un alumno nuevo</h1>
+    </header>
+
+    @* cuerpo *@
+    <main class="container mt-4">
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" class="form-control" @bind-value="@alumno.Nombre">
+                <ValidationMessage For="@(() => alumno.Nombre)" />
+            </div>
+
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+                <input id="sexo" class="form-control" @bind-value="@alumno.Sexo">
+                <ValidationMessage For="@(() => alumno.Sexo)" />
+            </div>
+
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <input id="fechaNacimiento" type="date" class="form-control" @bind-value="@alumno.FechaNacimiento">
+                <ValidationMessage For="@(() => alumno.FechaNacimiento)" />
+            </div>
+
+            <div class="form-group">
+                <label for="edad">Edad</label>
+                <input id="edad" class="form-control" @bind-value="@alumno.Edad">
+                <ValidationMessage For="@(() => alumno.Edad)" />
+            </div>
+
+            <div class="form-group">
+                <label for="cuil">Cuil</label>
+                <input id="cuil" class="form-control" @bind-value="@alumno.CUIL">
+                <ValidationMessage For="@(() => alumno.CUIL)" />
+            </div>
+
+            <div class="form-group">
+                <label for="pais">País</label>
+                <input id="pais" class="form-control" @bind-value="@alumno.Pais">
+                <ValidationMessage For="@(() => alumno.Pais)" />
+            </div>
+
+            <div class="form-group">
+                <label for="provincia">Provincia</label>
+                <input id="provincia" class="form-control" @bind-value="@alumno.Provincia">
+                <ValidationMessage For="@(() => alumno.Provincia)" />
+            </div>
+
+            <div class="form-group">
+                <label for="tituloBase">Título Base</label>
+                <input id="tituloBase" class="form-control" @bind-value="@alumno.TituloBase">
+                <ValidationMessage For="@(() => alumno.TituloBase)" />
+            </div>
+
+            <div class="form-group">
+                <label for="cus">Cus</label>
+                <input id="cus" class="form-control" @bind-value="@alumno.CUS">
+                <ValidationMessage For="@(() => alumno.CUS)" />
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input id="estado" class="form-control" @bind-value="@alumno.Estado">
+                <ValidationMessage For="@(() => alumno.Estado)" />
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-success" type="submit">Cargar datos</button>
+                <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+            </div>
+        </EditForm>
+    </main>
+
+    @* pié de página *@
+    <footer class="bg-primary text-white text-center py-2">
+        &copy; 2025 Tu Aplicación
+    </footer>
+</body>
+</html>
+
+@code {
+    private Alumno alumno = new Alumno();
+
+    private async Task Grabar()
+    {
+        var httpRespuesta = await http.Post<Alumno>("api/Alumnos", alumno);
+
+        if (httpRespuesta.err)
+        {
+            var body = httpRespuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/api/Alumnos");
+    }
+
+    private void Cancelar()
+    {
+        navigationManager.NavigateTo("/api/Alumnos");
+    }
 }
