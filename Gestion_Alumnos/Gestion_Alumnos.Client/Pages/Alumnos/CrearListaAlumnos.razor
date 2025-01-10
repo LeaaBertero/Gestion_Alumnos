@@ -177,6 +177,13 @@
 
     private async Task Grabar() 
     {
+        var httpRespuesta = await http.Post<Alumno>("api/Alumnos", alumno);
+
+        if (httpRespuesta.err)
+        {
+            var body = httpRespuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/api/Alumnos");
 
     }
 
