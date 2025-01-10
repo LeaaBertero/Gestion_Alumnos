@@ -19,133 +19,146 @@
     <main>
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Nombre</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Nombre">
+                    <ValidationMessage For="@(() => alumno.Nombre)" />
                 </div>
 
             </div>
         </EditForm> 
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Sexo</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Sexo">
+                    <ValidationMessage For="@(() => alumno.Sexo)" />
                 </div>
 
             </div>
         </EditForm> 
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>fecha de nacimiento</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.FechaNacimiento">
+                    <ValidationMessage For="@(() => alumno.FechaNacimiento)" />
                 </div>
 
             </div>
         </EditForm>
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Edad</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Edad">
+                    <ValidationMessage For="@(() => alumno.Edad)" />
                 </div>
 
             </div>
         </EditForm>  
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Cuil</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.CUIL">
+                    <ValidationMessage For="@(() => alumno.CUIL)" />
                 </div>
 
             </div>
         </EditForm>
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>País</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Pais">
+                    <ValidationMessage For="@(() => alumno.Pais)" />
                 </div>
 
             </div>
         </EditForm> 
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Provincia</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Provincia">
+                    <ValidationMessage For="@(() => alumno.Provincia)" />
                 </div>
 
             </div>
         </EditForm> 
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Título Base</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.TituloBase">
+                    <ValidationMessage For="@(() => alumno.TituloBase)" />
                 </div>
 
             </div>
         </EditForm>
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Cus</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.CUS">
+                    <ValidationMessage For="@(() => alumno.CUS)" />
                 </div>
 
             </div>
         </EditForm> 
-        
+
         <EditForm Model="alumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
-            
+
             <div class="form-group">
                 <label>Estado</label>
 
                 <div>
                     <input class="form-control" @bind-value="@alumno.Estado">
+                    <ValidationMessage For="@(() => alumno.Estado)" />
                 </div>
 
             </div>
         </EditForm>
+
+        <button class="btn btn-success" type="submit">Cargar datos</button>
+        <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
 
 
     </main>
@@ -159,9 +172,18 @@
 </html>
 
 @code {
+
     private Alumno alumno = new Alumno();
 
     private async Task Grabar() 
     {
+
     }
+
+    private void Cancelar() 
+    {
+        navigationManager.NavigateTo("/api/Alumnos");
+    }
+
+
 }
