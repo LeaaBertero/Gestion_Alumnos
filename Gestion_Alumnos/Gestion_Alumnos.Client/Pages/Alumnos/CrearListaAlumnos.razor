@@ -1,0 +1,167 @@
+﻿@page "/api/ListaAlumnos/crear"
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear lista alumnos</title>
+</head>
+
+<body>
+
+    @* cabecera *@
+    <header>
+        <h1>Hola, acá podes cargar un alumno nuevo</h1>
+    </header>
+
+    @* cuerpo *@
+    <main>
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Nombre</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Nombre">
+                </div>
+
+            </div>
+        </EditForm> 
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Sexo</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Sexo">
+                </div>
+
+            </div>
+        </EditForm> 
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>fecha de nacimiento</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.FechaNacimiento">
+                </div>
+
+            </div>
+        </EditForm>
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Edad</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Edad">
+                </div>
+
+            </div>
+        </EditForm>  
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Cuil</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.CUIL">
+                </div>
+
+            </div>
+        </EditForm>
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>País</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Pais">
+                </div>
+
+            </div>
+        </EditForm> 
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Provincia</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Provincia">
+                </div>
+
+            </div>
+        </EditForm> 
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Título Base</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.TituloBase">
+                </div>
+
+            </div>
+        </EditForm>
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Cus</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.CUS">
+                </div>
+
+            </div>
+        </EditForm> 
+        
+        <EditForm Model="alumno" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+            
+            <div class="form-group">
+                <label>Estado</label>
+
+                <div>
+                    <input class="form-control" @bind-value="@alumno.Estado">
+                </div>
+
+            </div>
+        </EditForm>
+
+
+    </main>
+
+    @* pié de página *@
+    <footer>
+
+    </footer>
+
+</body>
+</html>
+
+@code {
+    private Alumno alumno = new Alumno();
+
+    private async Task Grabar() 
+    {
+    }
+}
