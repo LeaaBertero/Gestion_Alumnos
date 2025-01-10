@@ -8,6 +8,9 @@
 
     @* enlace de css *@
     <link href="./css/Alumnos.css" rel="stylesheet" />
+
+    @* bootstrap *@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -17,7 +20,7 @@
     </header>
 
     <main>
-        @* lista  *@
+        @*Recorre una lista de Alumnos *@
         <table>
 
             <tr>
@@ -35,25 +38,29 @@
 
             </tr>
 
-
-            @* continuar desde acá *@
-           @*  @foreach (var item in listaAlumnos)
+            @if (listaAlumnos == null)
             {
-                <tr>
-                    <td>@item.Nombre</td>
-                    <td>@item.Sexo</td>
-                    <td>@item.FechaNacimiento</td>
-                    <td>@item.Edad</td>
-                    <td>@item.CUIL</td>
-                    <td>@item.Pais</td>
-                    <td>@item.Provincia</td>
-                    <td>@item.TituloBase</td>
-                    <td>@item.CUS</td>
-                    <td>@item.Estado</td>
-                </tr>
+                <p class="btn btn-primary">Buscando...</p>
+            }
+            else 
+            {
+                @foreach (var item in listaAlumnos)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Sexo</td>
+                        <td>@item.FechaNacimiento</td>
+                        <td>@item.Edad</td>
+                        <td>@item.CUIL</td>
+                        <td>@item.Pais</td>
+                        <td>@item.Provincia</td>
+                        <td>@item.TituloBase</td>
+                        <td>@item.CUS</td>
+                        <td>@item.Estado</td>
+                    </tr>
 
-            } *@
-            @* continuar desde acá *@
+                }
+            }
 
         </table>
 
@@ -63,6 +70,8 @@
 
     </footer>
 
+
+
 </body>
 
 </html>    
@@ -70,17 +79,34 @@
 @code {
     List<Alumno> listaAlumnos;
 
-    // protected override async Task OnInitializedAsync() 
-    // {
-    //     await base.OnInitializedAsync();
-    //     await Leer();
-    // }
+    // Task == void (Nota retorna nada)
+    protected override async Task OnInitializedAsync() 
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
 
-    // private async Task Leer() 
-    // {
-    //     var respuesta = 
-    // }
+    private async Task Leer() 
+    {
+        var resp = await http.Get<List<Alumno>>("api/Alumnos");
+        string Mensaje = "";
+
+        if (!resp.err)
+        {
+            listaAlumnos = resp.respuesta;
+
+        }
+        else 
+        {
+            Mensaje = "Error"; 
+        }
+
+    }  
+
+    
 }
+
+   
                 
                 
                 
