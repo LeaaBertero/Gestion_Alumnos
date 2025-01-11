@@ -10,7 +10,7 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 {
     public class Alumno : EntityBase
     {
-        //lave primaria de la tabla
+        //clave primaria de la tabla
         #region clave primaria de la tabla
         public int UsuarioId { get; set; }
         #endregion
