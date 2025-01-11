@@ -1,46 +1,27 @@
 ﻿body {
-    font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
-    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-header h1 {
-    color: #ffffff;
+header, footer {
     background-color: #343a40;
-    padding: 10px;
-    border-radius: 10px;
+    color: #fff;
+    padding: 10px 0;
 }
 
-table {
-    width: 100%;
+h1 {
+    font-size: 2.5rem;
+}
+
+.table-responsive {
     margin-top: 20px;
 }
 
-th, td {
-    padding: 15px;
-    text-align: left;
-}
-
-th {
+.table thead th {
     background-color: #007bff;
-    color: white;
+    color: #fff;
 }
 
-td:hover {
+.table tbody tr:hover {
     background-color: #f1f1f1;
-}
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    th, td {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-
-    a.btn {
-        font-size: 0.8em;
-    }
 }
