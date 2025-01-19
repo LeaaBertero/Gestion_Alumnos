@@ -1,6 +1,4 @@
-﻿@page "/api/Alumnos"
-@inject IHttpServicio http
-
+﻿
 @* <!DOCTYPE html>
 <html>
 <head>
@@ -89,6 +87,9 @@
 
 </html> *@
 
+@page "/api/Alumnos"
+@inject IHttpServicio http
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,8 +101,8 @@
 </head>
 <body>
     <header class="container mt-4">
-        <h1 class="text-center shadow mb-5">Lista de alumnos</h1>
-        <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Cargar nuevo alumno</a>
+        <h1 class="text-center shadow mb-5 text-uppercase">Lista de alumnos</h1>
+        <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Nuevo alumno</a>
     </header>
     <main class="container">
         <div class="table-responsive">
@@ -146,6 +147,9 @@
                                     <td>@item.TituloBase</td>
                                     <td>@item.CUS</td>
                                     <td>@item.Estado</td>
+
+                                    <a class="btn btn-primary" href="#">Editar</a>
+
                                 </tr>
                             }
                         }

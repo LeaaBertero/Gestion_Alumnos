@@ -1,4 +1,5 @@
 ﻿using Gestion_Alumnos.BD.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
+   [Index(nameof(UsuarioId), Name = "UsuarioId", IsUnique = true)]
+   [Index(nameof(Nombre), nameof(Sexo), nameof(FechaNacimiento),
+   nameof(Edad), nameof(CUIL), nameof(Pais), nameof(Provincia), nameof(TituloBase), nameof(CUS), nameof(Estado),
+   Name = "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado", IsUnique = false)]
     public class Alumno : EntityBase
     {
         //clave primaria de la tabla
@@ -30,12 +35,12 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         #region Atributos
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [MaxLength(150, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? Nombre { get; set; } //modificado con signo de pregunta
+        public string Nombre { get; set; } //modificado con signo de pregunta
         
         
         [Required(ErrorMessage = "Sexo")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? Sexo { get; set; } //modificado con signo de pregunta
+        public string Sexo { get; set; } //modificado con signo de pregunta
         
 
         
@@ -51,37 +56,37 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         
         [Required(ErrorMessage = "Ingrese el  Nro  de Cuil")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? CUIL { get; set; } //modificado con signo de pregunta
+        public string CUIL { get; set; } //modificado con signo de pregunta
         
 
         
         [Required(ErrorMessage = "Nacionalidad")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? Pais { get; set; } //modificado con signo de pregunta
+        public string Pais { get; set; } //modificado con signo de pregunta
         
 
         
         [Required(ErrorMessage = "Provincia")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? Provincia { get; set; } //modificacion con signo de pregunta
+        public string Provincia { get; set; } //modificacion con signo de pregunta
 
         
 
        
         [Required(ErrorMessage = "Titulo Base")] //corregir el titulo
         [MaxLength(60, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? TituloBase { get; set; }
+        public string TituloBase { get; set; }
         
 
         
         [Required(ErrorMessage = "CUS")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? CUS { get; set; }
+        public string CUS { get; set; }
       
 
         
         [Required(ErrorMessage = "El estado de la materia es obligatorio")]
-        public string? Estado { get; set; } //modificado con signo de pregunta
+        public string Estado { get; set; } //modificado con signo de pregunta
         
 
         #region comentarios de la tabla

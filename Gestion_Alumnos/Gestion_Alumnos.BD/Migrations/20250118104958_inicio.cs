@@ -199,7 +199,7 @@ namespace Gestion_Alumnos.BD.Migrations
                     Provincia = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TituloBase = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     CUS = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CarreraId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -562,9 +562,15 @@ namespace Gestion_Alumnos.BD.Migrations
                 column: "CarreraId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alumnos_UsuarioId",
+                name: "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado",
                 table: "Alumnos",
-                column: "UsuarioId");
+                columns: new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" });
+
+            migrationBuilder.CreateIndex(
+                name: "UsuarioId",
+                table: "Alumnos",
+                column: "UsuarioId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CertificadosAlumnos_AlumnoId",
@@ -776,9 +782,15 @@ namespace Gestion_Alumnos.BD.Migrations
                 columns: new[] { "MateriaEnPlanEstudioId", "ProfesorId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_PersonaId",
+                name: "Email_Contrasena_Estado",
                 table: "Usuarios",
-                column: "PersonaId");
+                columns: new[] { "Email", "Contrasena", "Estado" });
+
+            migrationBuilder.CreateIndex(
+                name: "PersonaId",
+                table: "Usuarios",
+                column: "PersonaId",
+                unique: true);
         }
 
         /// <inheritdoc />

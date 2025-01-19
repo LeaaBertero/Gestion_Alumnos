@@ -165,7 +165,7 @@
 }
  *@
 
-    @page "/api/ListaAlumnos/crear"
+@page "/api/ListaAlumnos/crear"
 @inject IHttpServicio http
 @inject NavigationManager navigationManager
 
@@ -183,67 +183,67 @@
 
   
     <main class="container mt-4">
-        <EditForm Model="alumno" OnValidSubmit="Grabar">
+        <EditForm Model="Nuevoalumno" OnValidSubmit="Grabar">
             <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input id="nombre" class="form-control" @bind-value="@alumno.Nombre">
-                <ValidationMessage For="@(() => alumno.Nombre)" />
+                <input id="nombre" class="form-control" @bind-value="@Nuevoalumno.Nombre">
+                <ValidationMessage For="@(() => Nuevoalumno.Nombre)" />
             </div>
 
             <div class="form-group">
                 <label for="sexo">Sexo</label>
-                <input id="sexo" class="form-control" @bind-value="@alumno.Sexo">
-                <ValidationMessage For="@(() => alumno.Sexo)" />
+                <input id="sexo" class="form-control" @bind-value="@Nuevoalumno.Sexo">
+                <ValidationMessage For="@(() => Nuevoalumno.Sexo)" />
             </div>
 
             <div class="form-group">
                 <label for="fechaNacimiento">Fecha de nacimiento</label>
-                <input id="fechaNacimiento" type="date" class="form-control" @bind-value="@alumno.FechaNacimiento">
-                <ValidationMessage For="@(() => alumno.FechaNacimiento)" />
+                <input id="fechaNacimiento" type="date" class="form-control" @bind-value="@Nuevoalumno.FechaNacimiento">
+                <ValidationMessage For="@(() => Nuevoalumno.FechaNacimiento)" />
             </div>
 
             <div class="form-group">
                 <label for="edad">Edad</label>
-                <input id="edad" class="form-control" @bind-value="@alumno.Edad">
-                <ValidationMessage For="@(() => alumno.Edad)" />
+                <input id="edad" class="form-control" @bind-value="@Nuevoalumno.Edad">
+                <ValidationMessage For="@(() => Nuevoalumno.Edad)" />
             </div>
 
             <div class="form-group">
                 <label for="cuil">Cuil</label>
-                <input id="cuil" class="form-control" @bind-value="@alumno.CUIL">
-                <ValidationMessage For="@(() => alumno.CUIL)" />
+                <input id="cuil" class="form-control" @bind-value="@Nuevoalumno.CUIL">
+                <ValidationMessage For="@(() => Nuevoalumno.CUIL)" />
             </div>
 
             <div class="form-group">
                 <label for="pais">País</label>
-                <input id="pais" class="form-control" @bind-value="@alumno.Pais">
-                <ValidationMessage For="@(() => alumno.Pais)" />
+                <input id="pais" class="form-control" @bind-value="@Nuevoalumno.Pais">
+                <ValidationMessage For="@(() => Nuevoalumno.Pais)" />
             </div>
 
             <div class="form-group">
                 <label for="provincia">Provincia</label>
-                <input id="provincia" class="form-control" @bind-value="@alumno.Provincia">
-                <ValidationMessage For="@(() => alumno.Provincia)" />
+                <input id="provincia" class="form-control" @bind-value="@Nuevoalumno.Provincia">
+                <ValidationMessage For="@(() => Nuevoalumno.Provincia)" />
             </div>
 
             <div class="form-group">
                 <label for="tituloBase">Título Base</label>
-                <input id="tituloBase" class="form-control" @bind-value="@alumno.TituloBase">
-                <ValidationMessage For="@(() => alumno.TituloBase)" />
+                <input id="tituloBase" class="form-control" @bind-value="@Nuevoalumno.TituloBase">
+                <ValidationMessage For="@(() => Nuevoalumno.TituloBase)" />
             </div>
 
             <div class="form-group">
                 <label for="cus">Cus</label>
-                <input id="cus" class="form-control" @bind-value="@alumno.CUS">
-                <ValidationMessage For="@(() => alumno.CUS)" />
+                <input id="cus" class="form-control" @bind-value="@Nuevoalumno.CUS">
+                <ValidationMessage For="@(() => Nuevoalumno.CUS)" />
             </div>
 
             <div class="form-group">
                 <label for="estado">Estado</label>
-                <input id="estado" class="form-control" @bind-value="@alumno.Estado">
-                <ValidationMessage For="@(() => alumno.Estado)" />
+                <input id="estado" class="form-control" @bind-value="@Nuevoalumno.Estado">
+                <ValidationMessage For="@(() => Nuevoalumno.Estado)" />
             </div>
 
             <div class="d-flex justify-content-between">
@@ -262,11 +262,11 @@
 </html>
 
 @code {
-    private Alumno alumno = new Alumno();
+    private Alumno Nuevoalumno = new Alumno();
 
     private async Task Grabar()
     {
-        var httpRespuesta = await http.Post<Alumno>("api/Alumnos", alumno);
+        var httpRespuesta = await http.Post<Alumno>("api/Alumnos", Nuevoalumno);
 
         if (httpRespuesta.err)
         {

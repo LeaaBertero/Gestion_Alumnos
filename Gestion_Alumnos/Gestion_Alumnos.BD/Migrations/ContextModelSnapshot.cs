@@ -48,7 +48,7 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateOnly>("FechaNacimiento")
                         .HasColumnType("date");
@@ -85,7 +85,10 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.HasIndex("CarreraId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex(new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" }, "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado");
+
+                    b.HasIndex(new[] { "UsuarioId" }, "UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("Alumnos");
                 });
@@ -800,7 +803,10 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonaId");
+                    b.HasIndex(new[] { "Email", "Contrasena", "Estado" }, "Email_Contrasena_Estado");
+
+                    b.HasIndex(new[] { "PersonaId" }, "PersonaId")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });
@@ -814,7 +820,7 @@ namespace Gestion_Alumnos.BD.Migrations
                         .IsRequired();
 
                     b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Alumnos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1127,6 +1133,11 @@ namespace Gestion_Alumnos.BD.Migrations
                     b.Navigation("AlumnosCursando");
 
                     b.Navigation("Clases");
+                });
+
+            modelBuilder.Entity("Proyecto_Alumnos.BD.Data.Entidades.Usuario", b =>
+                {
+                    b.Navigation("Alumnos");
                 });
 #pragma warning restore 612, 618
         }

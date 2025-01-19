@@ -1,4 +1,5 @@
 ﻿using Gestion_Alumnos.BD.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
+    [Index(nameof(PersonaId), Name = "PersonaId", IsUnique = true)]
+    [Index(nameof(Email), nameof(Contrasena), nameof(Estado),
+    Name = "Email_Contrasena_Estado", IsUnique = false)]
+    
     public class Usuario : EntityBase
     {
        
@@ -24,5 +29,7 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 
         [Required(ErrorMessage = "El estado es obligatorio")]
         public bool Estado { get; set; }
+
+        public List<Alumno> Alumnos { get; set; }
     }
 }
