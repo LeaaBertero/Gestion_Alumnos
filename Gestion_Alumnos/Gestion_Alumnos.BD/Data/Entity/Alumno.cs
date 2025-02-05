@@ -34,12 +34,12 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         //Atributos de la tabla
         #region Atributos
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        [MaxLength(150, ErrorMessage = "Máximo número de caracteres {1}.")]
+        [MaxLength(50, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Nombre { get; set; } //modificado con signo de pregunta
         
         
         [Required(ErrorMessage = "Sexo")]
-        [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
+        [MaxLength(20, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Sexo { get; set; } //modificado con signo de pregunta
         
 
@@ -59,25 +59,20 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         public string CUIL { get; set; } //modificado con signo de pregunta
         
 
-        
         [Required(ErrorMessage = "Nacionalidad")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Pais { get; set; } //modificado con signo de pregunta
         
-
         
         [Required(ErrorMessage = "Provincia")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Provincia { get; set; } //modificacion con signo de pregunta
 
-        
 
-       
         [Required(ErrorMessage = "Titulo Base")] //corregir el titulo
         [MaxLength(60, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string TituloBase { get; set; }
         
-
         
         [Required(ErrorMessage = "CUS")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]

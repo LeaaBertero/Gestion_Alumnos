@@ -55,8 +55,8 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Pais")
                         .IsRequired()
@@ -70,8 +70,8 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.Property<string>("Sexo")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("TituloBase")
                         .IsRequired()

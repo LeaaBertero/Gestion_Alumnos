@@ -190,8 +190,8 @@ namespace Gestion_Alumnos.BD.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Sexo = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     FechaNacimiento = table.Column<DateOnly>(type: "date", nullable: false),
                     Edad = table.Column<int>(type: "int", nullable: false),
                     CUIL = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),

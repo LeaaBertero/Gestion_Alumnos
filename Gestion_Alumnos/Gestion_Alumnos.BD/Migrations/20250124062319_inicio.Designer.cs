@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion_Alumnos.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250118104958_inicio")]
+    [Migration("20250124062319_inicio")]
     partial class inicio
     {
         /// <inheritdoc />
@@ -58,8 +58,8 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Pais")
                         .IsRequired()
@@ -73,8 +73,8 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.Property<string>("Sexo")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("TituloBase")
                         .IsRequired()
