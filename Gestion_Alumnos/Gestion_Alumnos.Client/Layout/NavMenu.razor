@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar bg-body-tertiary" href="">Gestión Alumnos</a>
+        <a class="navbar bg-body-tertiary" href="/">Gestión Alumnos</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,7 +11,7 @@
     <nav class="flex-column">
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
@@ -35,10 +35,12 @@
             </NavLink>
         </div>
         
+       
+        
         @* swagger *@
        
         <div class="nav-item px-1">
-            <NavLink class="nav-link text-light" href="https://localhost:7073/swagger" target="_blank">
+            <NavLink class="nav-link text-light" href="https://localhost:7073/swagger">
                 <span class="bi bi-list-nested-nav-menu text-neon" aria-hidden="true"></span> Swagger
             </NavLink>
         </div>

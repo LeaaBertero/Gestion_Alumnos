@@ -1,93 +1,4 @@
-﻿
-@* <!DOCTYPE html>
-<html>
-<head>
-    <title>Lista Alumnos</title>
-
-    
-    <link href="./css/ListaAlumnos.css" rel="stylesheet" />
-
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
-
-    <header>
-        <h1 class="text-center bg-warning fs-1 text shadow p-3 mb-5 bg-body rounded w-75 p-3 mx-auto text-uppercase">Lista de alumnos</h1>
-    
-        <a class="btn btn-primary" href="api/ListaAlumnos/crear">Cargar nuevo alumno</a>
-    </header> 
-
-    <main>
-        
-        <table>
-
-            <tr>
-
-                <th>Nombre</th>
-                <th>Sexo</th>
-                <th>FechaNacimiento</th>
-                <th>Edad</th>
-                <th>Cuil</th>
-                <th>Pais</th>
-                <th>Provincia</th>
-                <th>TituloBase</th>
-                <th>Cus</th>
-                <th>Estado</th>
-
-            </tr>
-
-            @if (Mensaje == "")
-            {
-                @if (listaAlumnos == null)
-                {
-                    <p class="btn btn-primary">Buscando...</p>
-                }
-                else if (listaAlumnos.Count == 0)
-                {
-                    <p>No existe la lista de alumnos solicitada</p>
-                }
-                else
-                {
-                    @foreach (var item in listaAlumnos)
-                    {
-                        <tr>
-                            <td>@item.Nombre</td>
-                            <td>@item.Sexo</td>
-                            <td>@item.FechaNacimiento</td>
-                            <td>@item.Edad</td>
-                            <td>@item.CUIL</td>
-                            <td>@item.Pais</td>
-                            <td>@item.Provincia</td>
-                            <td>@item.TituloBase</td>
-                            <td>@item.CUS</td>
-                            <td>@item.Estado</td>
-                        </tr>
-                    }
-                }
-            }
-            else
-            {
-                <p>Error: @Mensaje</p>
-            }
-
-            
-
-        </table>
-
-    </main>
-
-    <footer>
-    </footer>
-
-
-
-</body>
-
-</html> *@
-
-@page "/api/Alumnos"
+﻿@page "/api/Alumnos"
 @inject IHttpServicio http
 
 <!DOCTYPE html>
@@ -148,7 +59,7 @@
                                     <td>@item.CUS</td>
                                     <td>@item.Estado</td>
 
-                                    <a class="btn btn-primary" href="#">Editar</a>
+                                    <a class="btn btn-primary" href="/api/editarAlumno">Editar</a>
 
                                 </tr>
                             }
@@ -167,13 +78,10 @@
 </body>
 </html>
 
-
-
 @code {
-    List<Alumno> listaAlumnos;
-    string Mensaje = "";
+    private List<Alumno> listaAlumnos = new List<Alumno>();
+    private string Mensaje = "";
 
-    // Task == void (Nota retorna nada)
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -183,22 +91,18 @@
     private async Task Leer()
     {
         var resp = await http.Get<List<Alumno>>("api/Alumnos");
-        string Mensaje = "";
 
-        if (!resp.err)
+        if (!resp.Error)
         {
             listaAlumnos = resp.respuesta;
-
         }
         else
         {
             Mensaje = await resp.ObtenerError();
         }
-
     }
-
-
 }
+
 
 
 

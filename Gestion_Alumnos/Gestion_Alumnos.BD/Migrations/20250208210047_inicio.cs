@@ -17,7 +17,8 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarrereId = table.Column<int>(type: "int", nullable: false),
+                    CarreraId = table.Column<int>(type: "int", nullable: false),
+                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     DuracionCarrera = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Modalidad = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
@@ -189,7 +190,9 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    CarreraId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     FechaNacimiento = table.Column<DateOnly>(type: "date", nullable: false),
@@ -199,18 +202,11 @@ namespace Gestion_Alumnos.BD.Migrations
                     Provincia = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TituloBase = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     CUS = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarreraId = table.Column<int>(type: "int", nullable: false)
+                    Estado = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Alumnos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Alumnos_Carreras_CarreraId",
-                        column: x => x.CarreraId,
-                        principalTable: "Carreras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Alumnos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
@@ -555,11 +551,6 @@ namespace Gestion_Alumnos.BD.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Alumnos_CarreraId",
-                table: "Alumnos",
-                column: "CarreraId");
 
             migrationBuilder.CreateIndex(
                 name: "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado",

@@ -43,8 +43,8 @@ namespace Gestion_Alumnos.Server.Repositorio
             }
             catch (Exception err)
             {
-
-                throw err;
+                throw new Exception($"Error al insertar la entidad: {err.InnerException?.Message ?? err.Message}");
+                //throw err;
             }
         }
         #endregion

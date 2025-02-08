@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion_Alumnos.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250124062319_inicio")]
+    [Migration("20250208210047_inicio")]
     partial class inicio
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlumnoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CUIL")
                         .IsRequired()
@@ -85,8 +88,6 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarreraId");
 
                     b.HasIndex(new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" }, "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado");
 
@@ -176,7 +177,10 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CarrereId")
+                    b.Property<int>("AlumnoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarreraId")
                         .HasColumnType("int");
 
                     b.Property<string>("DuracionCarrera")
@@ -816,21 +820,11 @@ namespace Gestion_Alumnos.BD.Migrations
 
             modelBuilder.Entity("Proyecto_Alumnos.BD.Data.Entidades.Alumno", b =>
                 {
-                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Carrera", "Carrera")
-                        .WithMany()
-                        .HasForeignKey("CarreraId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Usuario", "Usuario")
+                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Usuario", null)
                         .WithMany("Alumnos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Carrera");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Proyecto_Alumnos.BD.Data.Entidades.CUPOF_Coordinador", b =>

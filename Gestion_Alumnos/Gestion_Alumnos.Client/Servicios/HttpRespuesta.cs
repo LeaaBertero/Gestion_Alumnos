@@ -3,15 +3,15 @@
     public class HttpRespuesta<T>
     {
         public T respuesta { get; }
-        public bool err { get; }
+        public bool Error { get; }
 
         public HttpResponseMessage HttpResponseMessage { get; set; }
 
         #region constructor HttpRespuesta
-        public HttpRespuesta(T respuesta, bool err, HttpResponseMessage httpResponseMessage)
+        public HttpRespuesta(T respuesta, bool error, HttpResponseMessage httpResponseMessage)
         {
             this.respuesta = respuesta;
-            this.err = err;
+            this.Error = error;
             HttpResponseMessage = httpResponseMessage;
         }
         #endregion
@@ -19,7 +19,7 @@
         #region Método Obtener Error
         public async Task<string> ObtenerError() 
         {
-            if (!err) 
+            if (!Error) 
             {
                 return "";
             }

@@ -10,8 +10,11 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 {
     public class Carrera : EntityBase
     {
+        public int CarreraId { get; set; }
 
-        public int CarrereId { get; set; }
+        //clave foranea de alumno agregada recientemente
+        public int AlumnoId { get; set; }
+
         [Required(ErrorMessage = "El nombre de la carrera es obligatoria")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Nombre { get; set; }

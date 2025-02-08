@@ -7,6 +7,7 @@ namespace Gestion_Alumnos.Client.Servicios
     {
         private readonly HttpClient http;
 
+        //constructor de la clase HttpServicio
         #region constructor HttpServicio
         public HttpServicio(HttpClient http)
         {
@@ -14,6 +15,7 @@ namespace Gestion_Alumnos.Client.Servicios
         }
         #endregion
 
+        //respuesta del endpoint, (Muestra una lista al usuario)
         #region Get HttpRespuesta
         public async Task<HttpRespuesta<T>> Get<T>(string url)
         {
@@ -31,6 +33,7 @@ namespace Gestion_Alumnos.Client.Servicios
         }
         #endregion
 
+        //postear un nuevo elemento
         #region Post HttpRespuesta
         public async Task<HttpRespuesta<object>> Post<T>(string url, T entidad)
         {
@@ -54,6 +57,7 @@ namespace Gestion_Alumnos.Client.Servicios
         }
         #endregion
 
+        
         #region Descerializar
         private async Task<T?> DeScerializar<T>(HttpResponseMessage response)
         {

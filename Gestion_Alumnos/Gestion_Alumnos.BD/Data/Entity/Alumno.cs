@@ -16,19 +16,20 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
     public class Alumno : EntityBase
     {
         //clave primaria de la tabla
-        #region clave primaria de la tabla
+        public int AlumnoId { get; set; }
+
         public int UsuarioId { get; set; }
-        #endregion
+        
 
         //clave foranea
-        #region clave foranea Usuario
-        public Usuario Usuario { get; set; }
-        #endregion
+        //#region clave primaria Usuario
+        //public Usuario Usuario { get; set; }
+        //#endregion
 
-       
+
 
         #region Clave foranea Carrera
-        public Carrera Carrera { get; set; }
+        public int CarreraId { get; set; }
         #endregion
 
         //Atributos de la tabla
@@ -82,39 +83,11 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         
         [Required(ErrorMessage = "El estado de la materia es obligatorio")]
         public string Estado { get; set; } //modificado con signo de pregunta
+
+
+
+
         
-
-        #region comentarios de la tabla
-        //[Required(ErrorMessage = "El departamento es obligatorio")]
-        //[MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? Departamento { get; set; }
-
-
-        //[Required(ErrorMessage = "Dato obligatorio")]
-        //[MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? FotocopiaDNI { get; set; }
-
-        //[Required(ErrorMessage = "La constancia de constancia de cuil es obligatoria")]
-        //[MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? ConstanciaCUIL { get; set; } 
-
-        //[Required(ErrorMessage = "Campo obligatorio")]
-        //[MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? PartidaNacimiento { get; set; }
-
-        //[Required(ErrorMessage = "Campo obligatorio")]
-        //[MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? Analitico { get; set; }
-
-        //[Required(ErrorMessage = "Campo obligatorio")]
-        //[MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        //public string? FotoCarnet { get; set; }
-
-        #endregion
-
-        #region Tabla Carrera relacionada
-        public int CarreraId { get; set; }
-        #endregion
 
 
         #region Listas de certificados
