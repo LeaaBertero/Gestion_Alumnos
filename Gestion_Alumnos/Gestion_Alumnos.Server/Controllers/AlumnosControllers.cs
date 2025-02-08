@@ -52,6 +52,24 @@ namespace Gestion_Alumnos.Server.Controllers
         }
         #endregion
 
+
+        //Método GetByDoc
+        #region GET POR DOCUMENTO
+        [HttpGet("Documento/{documento}")]
+        public async Task<ActionResult<Alumno>> GetAlumnoPorDocumento(string documento)
+        {
+            var PersonaAl = await repositorio.GetAlumnoPorDocumento(documento);
+
+            if (PersonaAl == null)
+            {
+                return NotFound($"No existe un alumno con el documento {documento}");
+            }
+
+            var pepe = mapper.Map<Alumno>(PersonaAl);
+            return Ok(pepe);
+        }
+        #endregion
+
     }
 }
         
