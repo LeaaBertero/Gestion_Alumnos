@@ -1,0 +1,132 @@
+﻿@page "/Buscador"
+@inject IHttpServicio http
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscador de Alumnos</title>
+    <!--(Aca poner la referencia para el css)-->
+</head>
+
+<body>
+
+    <header>
+        <h1>BUSCAR UN ALUMNO</h1>
+    </header>
+
+    <main>
+        <!-- Logo -->
+        <img src="itscweb.jpg" alt="Logo del Instituto" style="display:block; margin:auto; width: 500px; height: auto; position: relative;" />
+
+        @if (alumno != null && MostrarNombre_Carrera)
+        {
+            <div class="alumno-info">
+                <p class="nombre">@alumno?.Usuario?.Persona?.Nombre @alumno?.Usuario?.Persona?.Apellido</p>
+                <p class="carrera">@alumno?.Carrera?.Nombre</p>
+                <p class="bienvenido">¡Bienvenido!</p>
+            </div>
+        }
+
+        <!-- Buscar Alumno -->
+        <div>
+            @if (!BusquedaExitosa)
+            {
+                <div class="form-documento">
+                    <label for="documento">Documento:</label>
+                    <input type="text" id="documento" @bind="Doc" placeholder="Ingrese el documento" />
+                    <a class="btn btn-primary" @onclick="BuscarAlumno">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <br>
+
+        @if (alumno != null && !MostrarNombre_Carrera)
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Carrera</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@alumno.Usuario.Persona.Documento</td>
+                        <td>@alumno.Usuario.Persona.Nombre</td>
+                        <td>@alumno.Usuario.Persona.Apellido</td>
+                        <td>@alumno.Carrera.Nombre</td>
+                        <td>
+                            <a class="btn btn-success" @onclick="MostrarInformacionAlumno">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                    <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5z" />
+                                    <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+
+        @if(!string.IsNullOrWhiteSpace(mensaje))
+        {
+            <p>@mensaje</p>
+        }
+
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
+
+
+
+
+@code {
+    private string Doc = string.Empty;
+    private Alumno alumno = null;
+    private string mensaje = string.Empty;
+    private bool BusquedaExitosa = false;
+    private bool MostrarNombre_Carrera = false;
+
+    private async Task BuscarAlumno()
+    {
+        mensaje = string.Empty;
+        alumno = null;
+        BusquedaExitosa = false;
+        MostrarNombre_Carrera = false;
+
+        if (string.IsNullOrWhiteSpace(Doc))
+        {
+            mensaje = "Por favor, ingrese un documento válido.";
+
+            return;
+        }
+
+        var resp = await http.Get<Alumno>($"api/Alumnos/Documento/{Doc}");
+        if (!resp.err && resp.respuesta != null)
+        {
+            BusquedaExitosa = true;
+            alumno = resp.respuesta;
+        }
+        else
+        {
+            mensaje = "Alumno no encontrado.";
+
+        }
+    }
+
+
+    private void MostrarInformacionAlumno()
+    {
+        MostrarNombre_Carrera = true;
+    }
+}

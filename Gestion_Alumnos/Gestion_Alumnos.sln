@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestion_Alumnos.Server", "Gestion_Alumnos.Server\Gestion_Alumnos.Server.csproj", "{1A8C372D-A676-4AE4-841C-67B6F300177E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gestion_Alumnos.Server", "Gestion_Alumnos.Server\Gestion_Alumnos.Server.csproj", "{1A8C372D-A676-4AE4-841C-67B6F300177E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestion_Alumnos.BD", "Gestion_Alumnos.BD\Gestion_Alumnos.BD.csproj", "{A5C59578-4DD3-4877-AB05-69D0D421BCEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gestion_Alumnos.BD", "Gestion_Alumnos.BD\Gestion_Alumnos.BD.csproj", "{A5C59578-4DD3-4877-AB05-69D0D421BCEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestion_Alumnos.Shared", "Gestion_Alumnos.Shared\Gestion_Alumnos.Shared.csproj", "{F8E9BA2E-6AD5-4592-8250-AD6C062D70AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gestion_Alumnos.Shared", "Gestion_Alumnos.Shared\Gestion_Alumnos.Shared.csproj", "{F8E9BA2E-6AD5-4592-8250-AD6C062D70AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestion_Alumnos.Client", "Gestion_Alumnos.Client\Gestion_Alumnos.Client.csproj", "{0BC74855-45D5-4BE1-8192-C47954DD8217}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gestion_Alumnos.Client", "Gestion_Alumnos.Client\Gestion_Alumnos.Client.csproj", "{0BC74855-45D5-4BE1-8192-C47954DD8217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
