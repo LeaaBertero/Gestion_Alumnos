@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Gestion_Alumnos.BD.Migrations
 {
     /// <inheritdoc />
-    public partial class inicio : Migration
+    public partial class InicioVerdadero : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,6 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarreraId = table.Column<int>(type: "int", nullable: false),
-                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     DuracionCarrera = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Modalidad = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
@@ -190,9 +188,7 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    CarreraId1 = table.Column<int>(type: "int", nullable: false),
                     CarreraId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -202,15 +198,20 @@ namespace Gestion_Alumnos.BD.Migrations
                     Pais = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Provincia = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TituloBase = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    FotocopiaDNI = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    ConstanciaCUIL = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    PartidaNacimiento = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Analitico = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    FotoCarnet = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     CUS = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Alumnos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Alumnos_Carreras_CarreraId1",
-                        column: x => x.CarreraId1,
+                        name: "FK_Alumnos_Carreras_CarreraId",
+                        column: x => x.CarreraId,
                         principalTable: "Carreras",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -560,14 +561,9 @@ namespace Gestion_Alumnos.BD.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alumnos_CarreraId1",
+                name: "IX_Alumnos_CarreraId",
                 table: "Alumnos",
-                column: "CarreraId1");
-
-            migrationBuilder.CreateIndex(
-                name: "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado",
-                table: "Alumnos",
-                columns: new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" });
+                column: "CarreraId");
 
             migrationBuilder.CreateIndex(
                 name: "UsuarioId",

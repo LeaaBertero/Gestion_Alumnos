@@ -10,30 +10,21 @@ using System.Threading.Tasks;
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
    [Index(nameof(UsuarioId), Name = "UsuarioId", IsUnique = true)]
-   [Index(nameof(Nombre), nameof(Sexo), nameof(FechaNacimiento),
-   nameof(Edad), nameof(CUIL), nameof(Pais), nameof(Provincia), nameof(TituloBase), nameof(CUS), nameof(Estado),
-   Name = "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado", IsUnique = false)]
+   
     public class Alumno : EntityBase
     {
-        //clave primaria de la tabla
-        public int AlumnoId { get; set; }
 
         public int UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }
-        //clave foranea
-        //#region clave primaria Usuario
-        //public Usuario Usuario { get; set; }
-        //#endregion
-
 
 
         public Carrera Carrera { get; set; }
         public int CarreraId { get; set; }
         
 
-        //Atributos de la tabla
         #region Atributos
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [MaxLength(50, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Nombre { get; set; } //modificado con signo de pregunta
@@ -73,21 +64,34 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         [Required(ErrorMessage = "Titulo Base")] //corregir el titulo
         [MaxLength(60, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string TituloBase { get; set; }
-        
-        
-        [Required(ErrorMessage = "CUS")]
+
+        [Required(ErrorMessage = "Dato obligatorio")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? FotocopiaDNI { get; set; }
+
+        [Required(ErrorMessage = "El campo constancia es obligatorio")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? ConstanciaCUIL { get; set; } //esto es para indicar que el alumno trajo o mandó un documento virtual de la constancia de CUIL, no tiene que ver con el atributo "CUIL", el cual es el cuil real.
+
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? PartidaNacimiento { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? Analitico { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? FotoCarnet { get; set; }
+
+        [Required(ErrorMessage = "Dato obligatorio")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string CUS { get; set; }
+
       
-
-        
-        [Required(ErrorMessage = "El estado de la materia es obligatorio")]
+        [Required(ErrorMessage = "El estado del alumno es obligatorio")]
         public string Estado { get; set; } //modificado con signo de pregunta
-
-
-
-
-        
 
 
         #region Listas de certificados

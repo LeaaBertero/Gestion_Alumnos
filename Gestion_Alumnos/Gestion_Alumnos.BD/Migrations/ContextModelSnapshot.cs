@@ -30,8 +30,10 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlumnoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Analitico")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("CUIL")
                         .IsRequired()
@@ -46,18 +48,30 @@ namespace Gestion_Alumnos.BD.Migrations
                     b.Property<int>("CarreraId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CarreraId1")
-                        .HasColumnType("int");
+                    b.Property<string>("ConstanciaCUIL")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<int>("Edad")
                         .HasColumnType("int");
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("FechaNacimiento")
                         .HasColumnType("date");
+
+                    b.Property<string>("FotoCarnet")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("FotocopiaDNI")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -68,6 +82,11 @@ namespace Gestion_Alumnos.BD.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("PartidaNacimiento")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Provincia")
                         .IsRequired()
@@ -89,9 +108,7 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarreraId1");
-
-                    b.HasIndex(new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" }, "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado");
+                    b.HasIndex("CarreraId");
 
                     b.HasIndex(new[] { "UsuarioId" }, "UsuarioId")
                         .IsUnique();
@@ -178,12 +195,6 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AlumnoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarreraId")
-                        .HasColumnType("int");
 
                     b.Property<string>("DuracionCarrera")
                         .IsRequired()
@@ -824,7 +835,7 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Carrera", "Carrera")
                         .WithMany()
-                        .HasForeignKey("CarreraId1")
+                        .HasForeignKey("CarreraId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
