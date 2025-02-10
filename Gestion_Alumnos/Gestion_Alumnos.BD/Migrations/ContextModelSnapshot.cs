@@ -46,6 +46,9 @@ namespace Gestion_Alumnos.BD.Migrations
                     b.Property<int>("CarreraId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CarreraId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("Edad")
                         .HasColumnType("int");
 
@@ -85,6 +88,8 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CarreraId1");
 
                     b.HasIndex(new[] { "Nombre", "Sexo", "FechaNacimiento", "Edad", "CUIL", "Pais", "Provincia", "TituloBase", "CUS", "Estado" }, "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado");
 
@@ -817,11 +822,21 @@ namespace Gestion_Alumnos.BD.Migrations
 
             modelBuilder.Entity("Proyecto_Alumnos.BD.Data.Entidades.Alumno", b =>
                 {
-                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Usuario", null)
+                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Carrera", "Carrera")
+                        .WithMany()
+                        .HasForeignKey("CarreraId1")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Usuario", "Usuario")
                         .WithMany("Alumnos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Carrera");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Proyecto_Alumnos.BD.Data.Entidades.CUPOF_Coordinador", b =>

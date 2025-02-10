@@ -112,7 +112,7 @@
         }
 
         var resp = await http.Get<Alumno>($"api/Alumnos/Documento/{Doc}");
-        if (!resp.err && resp.respuesta != null)
+        if (!resp.Error && resp.respuesta != null)
         {
             BusquedaExitosa = true;
             alumno = resp.respuesta;

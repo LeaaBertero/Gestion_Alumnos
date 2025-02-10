@@ -19,8 +19,8 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         public int AlumnoId { get; set; }
 
         public int UsuarioId { get; set; }
-        
 
+        public Usuario Usuario { get; set; }
         //clave foranea
         //#region clave primaria Usuario
         //public Usuario Usuario { get; set; }
@@ -28,9 +28,9 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 
 
 
-        #region Clave foranea Carrera
+        public Carrera Carrera { get; set; }
         public int CarreraId { get; set; }
-        #endregion
+        
 
         //Atributos de la tabla
         #region Atributos

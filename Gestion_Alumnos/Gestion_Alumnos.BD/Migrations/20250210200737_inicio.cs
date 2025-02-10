@@ -192,6 +192,7 @@ namespace Gestion_Alumnos.BD.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AlumnoId = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    CarreraId1 = table.Column<int>(type: "int", nullable: false),
                     CarreraId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -207,6 +208,12 @@ namespace Gestion_Alumnos.BD.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Alumnos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Alumnos_Carreras_CarreraId1",
+                        column: x => x.CarreraId1,
+                        principalTable: "Carreras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Alumnos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
@@ -551,6 +558,11 @@ namespace Gestion_Alumnos.BD.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alumnos_CarreraId1",
+                table: "Alumnos",
+                column: "CarreraId1");
 
             migrationBuilder.CreateIndex(
                 name: "Nombre_Sexo_FechaNacimiento_Edad_CUIL_Pais_Provincia_TituloBase_CUS_Estado",
