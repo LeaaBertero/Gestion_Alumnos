@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion_Alumnos.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250210213438_InicioVerdadero")]
-    partial class InicioVerdadero
+    [Migration("20250212080624_inicio")]
+    partial class inicio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
