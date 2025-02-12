@@ -13,7 +13,7 @@
 <body>
     <header class="container mt-4">
         <h1 class="text-center shadow mb-5 text-uppercase">Lista de alumnos</h1>
-        <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Nuevo alumno</a>
+       @*  <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Nuevo alumno</a> *@
     </header>
     <main class="container">
         <div class="table-responsive">
@@ -89,7 +89,8 @@
 
 
 @code {
-    private List<Alumno> listaAlumnos = new List<Alumno>();
+    
+    List<Alumno> listaAlumnos = new List<Alumno>();
     private string Mensaje = "";
 
     protected override async Task OnInitializedAsync()
