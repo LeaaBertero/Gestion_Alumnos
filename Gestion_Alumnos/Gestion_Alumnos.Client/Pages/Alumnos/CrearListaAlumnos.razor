@@ -1,6 +1,6 @@
 ﻿@page "/api/ListaAlumnos/crear"
 @inject IHttpServicio http
-@inject NavigationManager navigationManager
+@inject NavigationManager NavigationManager
 
 <!DOCTYPE html>
 
@@ -140,7 +140,11 @@
 
     
     <footer class="bg-primary text-white text-center py-2">
-        &copy; 2025 Gestión de alumnos
+        
+        <div class="footer">
+            <p>&copy; 2025 Gestión de alumnos - Todos los derechos reservados. <span>LeaaBertero - Freelancer</span> </p>
+        </div>
+
     </footer>
 
 </body>
@@ -157,11 +161,11 @@
         {
             var body = httpRespuesta.HttpResponseMessage;
         }
-        navigationManager.NavigateTo("/api/Alumnos");
+        NavigationManager.NavigateTo("/api/Alumnos");
     }
 
     private void Cancelar()
     {
-        navigationManager.NavigateTo("/api/Alumnos");
+        NavigationManager.NavigateTo("/api/Alumnos");
     }
 }

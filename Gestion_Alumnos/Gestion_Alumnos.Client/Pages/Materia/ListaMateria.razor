@@ -1,0 +1,94 @@
+﻿@page "/api/Materia"
+@inject IHttpServicio http
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Materias</title>
+    <!-- Enlace de CSS personalizado -->
+    <link href="./css/listaMaterias.css" rel="stylesheet" />
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="container mt-4">
+        <h1 class="text-center shadow mb-5 text-uppercase">Lista de Materias</h1>
+        @*  <a class="btn btn-primary mb-3" href="api/ListaAlumnos/crear">Nuevo alumno</a> *@
+    </header>
+    <main class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Formato</th>
+                        <th>Formacion</th>
+                        <th>Resolucion ministerial</th>
+                        <th>Año</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Mensaje == "")
+                    {
+                        @if (listaMaterias == null)
+                        {
+                            <tr><td colspan="16" class="text-center">Buscando...</td></tr>
+                        }
+                        else if (listaMaterias.Count == 0)
+                        {
+                            <tr><td colspan="16" class="text-center">No hay datos cargados</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in listaMaterias)
+                            {
+                                <tr>
+                                    <td>@item.Nombre</td>
+                                    <td>@item.Formato</td>
+                                    <td>@item.Formacion</td>
+                                    <td>@item.ResolucionMinisterial</td>
+                                    <td>@item.Anno</td>
+                                    
+                                    @* <td><a class="btn btn-primary" href="/api/editarAlumno">Editar</a></td> *@
+                                </tr>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="16" class="text-center text-danger">Error: @Mensaje</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="container mt-4">
+    </footer>
+</body>
+</html>
+
+@code {
+    List<Materia> listaMaterias = new List<Materia>();
+    private string Mensaje = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var resp = await http.Get<List<Materia>>("api/Materia");
+
+        if (!resp.Error)
+        {
+            listaMaterias = resp.respuesta;
+        }
+        else
+        {
+            Mensaje = await resp.ObtenerError();
+        }
+    }
+}

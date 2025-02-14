@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
-   [Index(nameof(UsuarioId), Name = "UsuarioId", IsUnique = true)]
+   [Index(nameof(AlumnoId), Name = "AlumnoId", IsUnique = true)]
    
     public class Alumno : EntityBase
     {
+
+        public int AlumnoId { get; set; }
 
         public int UsuarioId { get; set; }
 
@@ -79,7 +81,7 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 
         [Required(ErrorMessage = "Campo obligatorio")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? Analitico { get; set; }
+        public string Analitico { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]

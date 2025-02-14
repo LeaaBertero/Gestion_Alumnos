@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar bg-body-tertiary" href="/">Gestión Alumnos</a>
+        <a class="navbar bg-body-tertiary" href="">Gestión Alumnos</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,22 +30,53 @@
         </div>  *@
         
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="api/Alumnos">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Lista Alumnos
+            <NavLink class="nav-link" href="/api/ListaAlumnos/crear">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Cargar_alumnos
+            </NavLink>
+        </div> 
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/api/Alumnos">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Lista_alumnos
             </NavLink>
         </div>
         
+        
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/api/ListaAlumnos/crear">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Cargar alumno
+            <NavLink class="nav-link" href="/api/ListaMaterias/crear">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Cargar_materia
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/api/Materia">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Lista_materia
+            </NavLink>
+        </div> 
+
+        <div class="nav-item px-3">
             <NavLink class="nav-link" href="/Buscador">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Buscar Alumno
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Buscador_alumnos
             </NavLink>
         </div>
+
+        @* <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Nosotros">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Nosotros
+            </NavLink>
+        </div> 
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Programas">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span>Programas
+            </NavLink>
+        </div>  
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Contacto">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span>Contacto
+            </NavLink>
+        </div> *@
         
        
         

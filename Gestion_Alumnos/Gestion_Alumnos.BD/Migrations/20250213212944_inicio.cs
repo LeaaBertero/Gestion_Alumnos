@@ -17,6 +17,8 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CarreraId = table.Column<int>(type: "int", nullable: false),
+                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     DuracionCarrera = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Modalidad = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
@@ -188,7 +190,9 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AlumnoId = table.Column<int>(type: "int", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    CarreraId1 = table.Column<int>(type: "int", nullable: false),
                     CarreraId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -210,8 +214,8 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     table.PrimaryKey("PK_Alumnos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Alumnos_Carreras_CarreraId",
-                        column: x => x.CarreraId,
+                        name: "FK_Alumnos_Carreras_CarreraId1",
+                        column: x => x.CarreraId1,
                         principalTable: "Carreras",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -561,15 +565,20 @@ namespace Gestion_Alumnos.BD.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alumnos_CarreraId",
+                name: "AlumnoId",
                 table: "Alumnos",
-                column: "CarreraId");
+                column: "AlumnoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "UsuarioId",
+                name: "IX_Alumnos_CarreraId1",
                 table: "Alumnos",
-                column: "UsuarioId",
-                unique: true);
+                column: "CarreraId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alumnos_UsuarioId",
+                table: "Alumnos",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CertificadosAlumnos_AlumnoId",

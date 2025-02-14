@@ -1,0 +1,114 @@
+﻿@page "/api/ListaMaterias/crear"
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Crear lista materias</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+    <link href="./css/CrearListaAlumnos.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Ingresá los datos de las materias</h1>
+    </header>
+
+
+    <main class="container mt-4">
+        <EditForm Model="NuevaMateria" OnValidSubmit="Grabar">
+            <DataAnnotationsValidator />
+
+            <div class="back-formulario">
+
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" class="form-control" @bind-value="@NuevaMateria.Nombre">
+                    <ValidationMessage For="@(() => NuevaMateria.Nombre)" />
+                </div> 
+                
+                <div>
+                    <label for="formato">Formato</label>
+                    <input id="formato" class="form-control" @bind-value="@NuevaMateria.Formato">
+                    <ValidationMessage For="@(() => NuevaMateria.Formato)" />
+                </div>
+                
+                <div>
+                    <label for="formacion">Formación</label>
+                    <input id="formacion" class="form-control" @bind-value="@NuevaMateria.Formacion">
+                    <ValidationMessage For="@(() => NuevaMateria.Formacion)" />
+                </div> 
+                
+                <div>
+                    <label for="resolucionMinisterial">Resolución ministerial</label>
+                    <input id="resolucionMinisterial" class="form-control" @bind-value="@NuevaMateria.ResolucionMinisterial">
+                    <ValidationMessage For="@(() => NuevaMateria.ResolucionMinisterial)" />
+                </div>
+                
+                <div>
+                    <label for="Año">Año</label>
+                    <input id="Año" class="form-control" @bind-value="@NuevaMateria.Anno">
+                    <ValidationMessage For="@(() => NuevaMateria.Anno)" />
+                </div>
+
+             
+
+                <div class="backround-botones d-flex justify-content-around align-items-lg-center p-4 m-4 shadow border-5 rounded-pill">
+
+                    <div class="btn-cargarDatos">
+                        <button class="btn btn-success" type="submit">Cargar datos</button>
+                    </div>
+
+                    <div class="btn-cancelar">
+                        <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </EditForm>
+
+    </main>
+
+
+    <footer class="bg-primary text-white text-center py-2">
+
+        <div class="footer">
+            <p>&copy; 2025 Gestión de alumnos - Todos los derechos reservados. <span>LeaaBertero - Freelancer</span> </p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
+
+@code {
+
+    private Materia NuevaMateria = new Materia();
+
+    private async Task Grabar()
+    {
+        var httpRespuesta = await http.Post<Materia>("api/Materia", NuevaMateria);
+
+        if (httpRespuesta.Error)
+        {
+            var body = httpRespuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/api/Materia");
+    }
+
+    private void Cancelar()
+    {
+        navigationManager.NavigateTo("/api/Materia");
+    }
+}
