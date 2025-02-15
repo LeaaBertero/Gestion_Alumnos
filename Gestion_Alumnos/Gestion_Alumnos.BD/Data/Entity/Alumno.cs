@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Alumnos.BD.Data.Entidades
 {
-   [Index(nameof(AlumnoId), Name = "AlumnoId", IsUnique = true)]
+   [Index(nameof(UsuarioId), Name = "UsuarioId", IsUnique = true)]
    
     public class Alumno : EntityBase
     {
 
-        public int AlumnoId { get; set; }
+        //public int AlumnoId { get; set; }
 
         public int UsuarioId { get; set; }
 

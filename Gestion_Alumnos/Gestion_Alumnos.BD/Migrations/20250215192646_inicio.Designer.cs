@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion_Alumnos.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250213212944_inicio")]
+    [Migration("20250215192646_inicio")]
     partial class inicio
     {
         /// <inheritdoc />
@@ -33,9 +33,6 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlumnoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Analitico")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -52,9 +49,6 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<int>("CarreraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarreraId1")
                         .HasColumnType("int");
 
                     b.Property<string>("ConstanciaCUIL")
@@ -117,11 +111,9 @@ namespace Gestion_Alumnos.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarreraId1");
+                    b.HasIndex("CarreraId");
 
-                    b.HasIndex("UsuarioId");
-
-                    b.HasIndex(new[] { "AlumnoId" }, "AlumnoId")
+                    b.HasIndex(new[] { "UsuarioId" }, "UsuarioId")
                         .IsUnique();
 
                     b.ToTable("Alumnos");
@@ -206,12 +198,6 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AlumnoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarreraId")
-                        .HasColumnType("int");
 
                     b.Property<string>("DuracionCarrera")
                         .IsRequired()
@@ -852,7 +838,7 @@ namespace Gestion_Alumnos.BD.Migrations
                 {
                     b.HasOne("Proyecto_Alumnos.BD.Data.Entidades.Carrera", "Carrera")
                         .WithMany()
-                        .HasForeignKey("CarreraId1")
+                        .HasForeignKey("CarreraId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
