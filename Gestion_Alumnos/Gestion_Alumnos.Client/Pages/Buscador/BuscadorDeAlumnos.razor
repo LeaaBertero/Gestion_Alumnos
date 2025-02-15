@@ -1,22 +1,23 @@
 ﻿@page "/Buscador"
 @inject IHttpServicio http
+@inject AlumnoService alumnoService
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Buscador de Alumnos</title>
-    <!--(Aca poner la referencia para el css)-->
+    <link href="./css/BuscadorAlumnos.css" rel="stylesheet" />
 </head>
 
 <body>
 
     <header>
-        <h1>BUSCAR UN ALUMNO</h1>
+         <!-- Logo -->
+        <img src="itscweb.jpg" alt="Logo del Instituto" style="display:block; margin:auto; width: 500px; height: auto; position: relative;" />
     </header>
 
     <main>
-        <!-- Logo -->
-        <img src="itscweb.jpg" alt="Logo del Instituto" style="display:block; margin:auto; width: 500px; height: auto; position: relative;" />
+
 
         @if (alumno != null && MostrarNombre_Carrera)
         {
@@ -44,6 +45,7 @@
         </div>
 
         <br>
+         <!-- Mostrar Alumno -->
 
         @if (alumno != null && !MostrarNombre_Carrera)
         {
@@ -116,6 +118,7 @@
         {
             BusquedaExitosa = true;
             alumno = resp.respuesta;
+            alumnoService.Documento = Doc;
         }
         else
         {

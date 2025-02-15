@@ -1,0 +1,104 @@
+﻿@page "/Mis-Notas"
+@using Gestion_Alumnos.Shared.DTO
+@inject IHttpServicio http
+@inject AlumnoService AlumnoService
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Mis Notas</title>
+    <link href="./css/CursadoMaterias.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-start contenedor-personalizado">
+        <div class="card border-0 shadow-lg" style="width: 100%; border-radius: 10px;">
+            <div class="card-header">
+                <h4>Materias Cursadas</h4>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(mensajeError))
+                {
+                    <p class="text-danger">@mensajeError</p>
+                }
+
+                @if (materiasCursadas == null || !materiasCursadas.Any())
+                {
+                    <p class="text-danger">@mensajeError</p>
+                }
+
+                @if (materiasCursadas != null && materiasCursadas.Any())
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Turno</th>
+                                <th>Notas</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var materia in materiasCursadas)
+                            {
+                                <tr>
+                                    <td>@materia.MateriaNombre</td>
+                                    <td>@materia.Turno</td>
+                                    <td>
+                                        <ul>
+                                            @foreach (var nota in materia.Notas)
+                                            {
+                                                <li>@nota.TipoEvaluacion: @nota.ValorNota</li>
+                                            }
+                                        </ul>
+                                    </td>
+                                    <td>@materia.CondicionActual</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    private List<GetMateriaCursadaDTO> materiasCursadas;
+    private string mensajeError;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await BuscarMateriasCursadas();
+    }
+
+    private async Task BuscarMateriasCursadas()
+    {
+        try
+        {
+            mensajeError = null;
+
+            if (string.IsNullOrEmpty(AlumnoService.Documento))
+            {
+                mensajeError = "El documento no está definido.";
+                return;
+            }
+
+            var resp = await http.Get<List<GetMateriaCursadaDTO>>($"api/CursadoMateria/{AlumnoService.Documento}");
+
+            materiasCursadas = resp.respuesta;
+
+            
+            if (materiasCursadas == null || !materiasCursadas.Any())
+            {
+                mensajeError = "Todavía no te asignamos materias.";
+            }
+        }
+        catch (HttpRequestException)
+        {
+            mensajeError = "Ocurrió un error al buscar los datos. Verifica el documento.";
+            materiasCursadas = null;
+        }
+    }
+}

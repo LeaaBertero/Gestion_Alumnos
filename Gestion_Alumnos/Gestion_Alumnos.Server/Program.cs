@@ -1,5 +1,6 @@
 using Gestion_Alumnos.BD.Data;
 using Gestion_Alumnos.Server.Repositorio;
+using Gestion_Alumnos.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -43,6 +44,8 @@ builder.Services.AddScoped<IAlumnoRepositorio, AlumnoRepositorio>();
 
 #region constructor de la interfaz Materia
 builder.Services.AddScoped<IMateriaRepositorio, MateriaRepositorio>();
+builder.Services.AddScoped<ICursadoMateriaRepositorio, CursadoMateriaRepositorio>();
+builder.Services.AddScoped<AlumnoService>();
 #endregion
 
 //--------------------------------------------------------------------------------
