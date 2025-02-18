@@ -119,7 +119,8 @@
 @code {
     private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    // private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavMenuCssClass => null; //codigo que evita que desaparezca el menu
 
     private void ToggleNavMenu()
     {
