@@ -1,0 +1,97 @@
+﻿@page "/Tramites"
+@inject IHttpServicio http
+@inject AlumnoService alumnoService
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trámites Alumnos</title>
+    <link href="./css/Tramites.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <header>
+        <div class="contenedor-img">
+            <img src="https://8048bf14c1.clvaw-cdnwnd.com/f80d7a5356be0d319861778d7e89b608/200002435-152d7152da/Logo%20para%20WEB%202-edit-20230311142853.jpg?ph=8048bf14c1" alt="logo-instituto" />
+        </div>
+        <div class="alumno-info">
+            <p class="nombre">@alumno?.Usuario?.Persona?.Nombre @alumno?.Usuario?.Persona?.Apellido</p>
+            <p class="carrera">@alumno?.Carrera?.Nombre</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h4 class="mb-0" style="font-weight: 600;">Mis trámites</h4>
+                </div>
+                @if (alumno == null)
+                {
+                    <p>Documento no proporcionado</p>
+                }
+                else
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Titulo base</th>
+                                <th>Fotocopia DNI</th>
+                                <th>Constancia Cuil</th>
+                                <th>Partida de nacimiento</th>
+                                <th>Analítico</th>
+                                <th>Foto carnet</th>
+                                <th>Cus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@alumno.TituloBase</td>
+                                <td>@alumno.FotocopiaDNI</td>
+                                <td>@alumno.ConstanciaCUIL</td>
+                                <td>@alumno.PartidaNacimiento</td>
+                                <td>@alumno.Analitico</td>
+                                <td>@alumno.FotoCarnet</td>
+                                <td>@alumno.CUS</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+</body>
+</html>
+
+@code {
+    private Alumno alumno = null;
+    private string mensaje = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(alumnoService.Documento))
+        {
+            var resp = await http.Get<Alumno>($"api/Alumnos/Documento/{alumnoService.Documento}");
+            if (!resp.Error && resp.respuesta != null)
+            {
+                alumno = resp.respuesta;
+            }
+            else
+            {
+                mensaje = "Alumno no encontrado.";
+            }
+        }
+        else
+        {
+            mensaje = "Documento no proporcionado.";
+        }
+    }
+}

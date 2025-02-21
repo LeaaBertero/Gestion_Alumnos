@@ -1,0 +1,52 @@
+﻿thead {
+    background-color: darkblue;
+    color: white;
+}
+
+.alumno-info {
+    position: absolute;
+    top: 105px;
+    right: 10px;
+    color: black;
+    font-size: 18px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+}
+
+    .alumno-info p {
+        margin: 0;
+        padding: 0;
+    }
+
+.nombre {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.carrera {
+    font-size: 16px;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: darkblue
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.card {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.contenedor-img {
+    display: flex;
+    justify-content: center;
+}
