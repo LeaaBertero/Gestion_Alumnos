@@ -1,0 +1,110 @@
+﻿@page "/DatosPersonales-Alumnos"
+@inject IHttpServicio http
+@inject AlumnoService alumnoService
+
+<style>
+    thead {
+        background-color: darkblue;
+        color: white;
+    }
+
+    .alumno-info {
+        position: absolute;
+        top: 105px;
+        right: 10px;
+        color: black;
+        font-size: 18px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-family: Arial, sans-serif;
+    }
+
+        .alumno-info p {
+            margin: 0;
+            padding: 0;
+        }
+
+    .nombre {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .carrera {
+        font-size: 16px;
+        font-style: italic;
+        margin-top: 5px;
+    }
+</style>
+
+<img src="itscweb.jpg" alt="Logo del Instituto" style="display:block; margin:auto; width: 500px; height: auto;" />
+<hr>
+<div class="alumno-info">
+    <p class="nombre">@alumno?.Usuario?.Persona?.Nombre @alumno?.Usuario?.Persona?.Apellido</p>
+    <p class="carrera">@alumno?.Carrera?.Nombre</p>
+</div>
+<div class="container d-flex justify-content-center align-items-start contenedor-personalizado">
+    <div class="card border-0 shadow-lg" style="width: 100%; border-radius: 10px;">
+        <div class="card-header bg-primary text-white text-center py-4" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+            <h4 class="mb-0" style="font-weight: 600;">Datos personales</h4>
+        </div>
+        @if (alumno != null)
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>CUIL</th>
+                        <th>Edad</th>
+                        <th>Documento</th>
+                        <th>E-Mail</th>
+                        <th>Domicilio</th>
+                        <th>Telefono</th>
+                        <th>Fecha de nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@alumno.CUIL</td>
+                        <td>@alumno.Edad</td>
+                        <td>@alumno.Usuario.Persona.Documento</td>
+                        <td>@alumno.Usuario.Email</td>
+                        <td>@alumno.Usuario.Persona.Domicilio</td>
+                        <td>@alumno.Usuario.Persona.Telefono</td>
+                        <td>@alumno.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        else if (!string.IsNullOrWhiteSpace(mensaje))
+        {
+            <p>@mensaje</p>
+        }
+    </div>
+</div>
+
+@code {
+    private Alumno alumno = null;
+    private string mensaje = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(alumnoService.Documento))
+        {
+            var resp = await http.Get<Alumno>($"api/Alumnos/Documento/{alumnoService.Documento}");
+            if (!resp.Error && resp.respuesta != null)
+            {
+                alumno = resp.respuesta;
+            }
+            else
+            {
+                mensaje = "Alumno no encontrado.";
+            }
+        }
+        else
+        {
+            mensaje = "Documento no proporcionado.";
+        }
+    }
+
+
+
+}
