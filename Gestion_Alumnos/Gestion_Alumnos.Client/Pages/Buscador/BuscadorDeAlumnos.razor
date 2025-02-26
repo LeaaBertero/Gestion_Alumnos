@@ -1,6 +1,7 @@
 ﻿@page "/Buscador"
 @inject IHttpServicio http
 @inject AlumnoService alumnoService
+@inject ServicioMostrarMenu mostrarMenu
 
 <!DOCTYPE html>
 <html>
@@ -109,7 +110,7 @@
         if (string.IsNullOrWhiteSpace(Doc))
         {
             mensaje = "Por favor, ingrese un documento válido.";
-
+            mostrarMenu.ActualizarEstado(false);
             return;
         }
 
@@ -122,6 +123,7 @@
         }
         else
         {
+            mostrarMenu.ActualizarEstado(false);
             mensaje = "Alumno no encontrado.";
 
         }
@@ -131,5 +133,6 @@
     private void MostrarInformacionAlumno()
     {
         MostrarNombre_Carrera = true;
+        mostrarMenu.ActualizarEstado(true);
     }
 }

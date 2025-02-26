@@ -16,6 +16,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 //Contrucción del servicio de la interfáz de HttpServicio
 #region Servicio de Interfaz HttpServicio
 builder.Services.AddScoped<IHttpServicio,HttpServicio>();
+builder.Services.AddSingleton<ServicioMostrarMenu>();
 #endregion
 
 await builder.Build().RunAsync();
