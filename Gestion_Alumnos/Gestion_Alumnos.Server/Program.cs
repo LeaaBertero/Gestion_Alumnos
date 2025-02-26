@@ -45,6 +45,10 @@ builder.Services.AddScoped<IAlumnoRepositorio, AlumnoRepositorio>();
 #region constructor de la interfaz Materia
 builder.Services.AddScoped<IMateriaRepositorio, MateriaRepositorio>();
 builder.Services.AddScoped<ICursadoMateriaRepositorio, CursadoMateriaRepositorio>();
+builder.Services.AddScoped<IPersonaRepositorio, PersonaRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+builder.Services.AddScoped<ICarreraRepositorio, CarreraRepositorio>();
 builder.Services.AddScoped<AlumnoService>();
 #endregion
 

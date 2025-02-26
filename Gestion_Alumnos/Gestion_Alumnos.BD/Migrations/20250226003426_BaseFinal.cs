@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Gestion_Alumnos.BD.Migrations
 {
     /// <inheritdoc />
-    public partial class inicio : Migration
+    public partial class BaseFinal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -192,11 +192,12 @@ namespace Gestion_Alumnos.BD.Migrations
                     CarreraId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    FechaNacimiento = table.Column<DateOnly>(type: "date", nullable: false),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Edad = table.Column<int>(type: "int", nullable: false),
                     CUIL = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Pais = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Provincia = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Departamento = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TituloBase = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     FotocopiaDNI = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     ConstanciaCUIL = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),

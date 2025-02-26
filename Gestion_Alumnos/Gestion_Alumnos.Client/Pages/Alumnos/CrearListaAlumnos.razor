@@ -1,171 +1,301 @@
 ﻿@page "/api/ListaAlumnos/crear"
 @inject IHttpServicio http
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
+@inject HttpClient _http
+@using Gestion_Alumnos.Shared.DTO
+@using Proyecto_Alumnos.BD.Data.Entidades
 
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-    <title>Crear lista alumnos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    
-   
-    <link href="./css/CursadoMaterias.css" rel="stylesheet" />
-
-</head>
-
-<body>
-   
-    <header class="bg-primary text-white text-center py-3">
-        <h1>Ingresá acá los datos de los alumnos</h1>
-    </header>
-
-  
-    <main class="container mt-4">
-        <EditForm Model="NuevoAlumno" OnValidSubmit="Grabar">
-            <DataAnnotationsValidator />
-
-            <div class="back-formulario">
-                
-                <div>
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" class="form-control" @bind-value="@NuevoAlumno.Nombre">
-                    <ValidationMessage For="@(() => NuevoAlumno.Nombre)" />
-                </div>
-
-                <div>
-                    <label for="sexo">Sexo</label>
-                    <input id="sexo" class="form-control" @bind-value="@NuevoAlumno.Sexo">
-                    <ValidationMessage For="@(() => NuevoAlumno.Sexo)" />
-                </div>
-
-                <div>
-                    <label for="fechaNacimiento">Fecha de nacimiento</label>
-                    <input id="fechaNacimiento" type="date" class="form-control" @bind-value="@NuevoAlumno.FechaNacimiento">
-                    <ValidationMessage For="@(() => NuevoAlumno.FechaNacimiento)" />
-                </div>
-
-                <div>
-                    <label for="edad">Edad</label>
-                    <input id="edad" class="form-control" @bind-value="@NuevoAlumno.Edad">
-                    <ValidationMessage For="@(() => NuevoAlumno.Edad)" />
-                </div>
-
-                <div>
-                    <label for="cuil">Cuil</label>
-                    <input id="cuil" class="form-control" @bind-value="@NuevoAlumno.CUIL">
-                    <ValidationMessage For="@(() => NuevoAlumno.CUIL)" />
-                </div>
-           
-                <div>
-                    <label for="pais">País</label>
-                    <input id="pais" class="form-control" @bind-value="@NuevoAlumno.Pais">
-                    <ValidationMessage For="@(() => NuevoAlumno.Pais)" />
-                </div>
-            
-                <div>
-                    <label for="provincia">Provincia</label>
-                    <input id="provincia" class="form-control" @bind-value="@NuevoAlumno.Provincia">
-                    <ValidationMessage For="@(() => NuevoAlumno.Provincia)" />
-                </div>
-            
-                <div>
-                    <label for="tituloBase">Título Base</label>
-                    <input id="tituloBase" class="form-control" @bind-value="@NuevoAlumno.TituloBase">
-                    <ValidationMessage For="@(() => NuevoAlumno.TituloBase)" />
-                </div>
-
-                <div>
-                    <label for="FotocopiaDNI">Fotocopia DNI</label>
-                    <input id="FotocopiaDNI" class="form-control" @bind-value="@NuevoAlumno.FotocopiaDNI">
-                    <ValidationMessage For="@(() => NuevoAlumno.FotocopiaDNI)" />
-                </div> 
-           
-                <div>
-                    <label for="ConstanciaCUIL">Constancia de CUIL</label>
-                    <input id="ConstanciaCUIL" class="form-control" @bind-value="@NuevoAlumno.ConstanciaCUIL">
-                    <ValidationMessage For="@(() => NuevoAlumno.ConstanciaCUIL)" />
-                </div>
-
-                <div>
-                    <label for="PartidaNacimiento">Partida de Nacimiento</label>
-                    <input id="PartidaNacimiento" class="form-control" @bind-value="@NuevoAlumno.PartidaNacimiento">
-                    <ValidationMessage For="@(() => NuevoAlumno.PartidaNacimiento)" />
-                </div>
-
-                <div>
-                    <label for="Analitico">Analítico</label>
-                    <input id="Analitico" class="form-control" @bind-value="@NuevoAlumno.Analitico">
-                    <ValidationMessage For="@(() => NuevoAlumno.Analitico)" />
-                </div>
-            
-                <div>
-                    <label for="FotoCarnet">Foto Carnet</label>
-                    <input id="FotoCarnet" class="form-control" @bind-value="@NuevoAlumno.FotoCarnet">
-                    <ValidationMessage For="@(() => NuevoAlumno.FotoCarnet)" />
-                </div>
-          
-                <div>
-                    <label for="CUS">Cus</label>
-                    <input id="CUS" class="form-control" @bind-value="@NuevoAlumno.CUS">
-                    <ValidationMessage For="@(() =>NuevoAlumno.CUS)" />
-                </div>
-           
-                <div>
-                    <label for="Estado">Estado</label>
-                    <input id="Estado" class="form-control" @bind-value="@NuevoAlumno.Estado">
-                    <ValidationMessage For="@(() => NuevoAlumno.Estado)" />
-                </div>
-
-                <div class="backround-botones d-flex justify-content-around align-items-lg-center p-4 m-4 shadow border-5 rounded-pill">
-
-                    <div class="btn-cargarDatos">
-                        <button class="btn btn-success" type="submit">Cargar datos</button>
-                    </div>
-                
-                    <div class="btn-cancelar">
-                        <button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
-                    </div>
-
-                </div>
+<h3>Nuevo Alumno</h3>
 
 
-            </div>
 
-        </EditForm>
 
-    </main>
+<EditForm Model="alumno" OnValidSubmit="Grabar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-    
-    <footer class="bg-primary text-white text-center py-2">
-        
-        <div class="footer">
-            <p>&copy; 2025 Gestión de alumnos - Todos los derechos reservados. <span>LeaaBertero - Freelancer</span> </p>
-        </div>
+    <!-- Campos para los datos del alumno -->
+    <div class="form-group">
+        <label for="CarreraId">Carrera</label>
+        <InputSelect class="form-control" id="CarreraId" @bind-Value="alumno.CarreraId">
+            <option value="">Seleccione...</option>
+            @foreach (var carrera in carreras)
+            {
+                <option value="@carrera.Id">@carrera.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label>Nombre</label>
+        <InputText class="form-control" @bind-Value="alumno.Nombre" />
+        <ValidationMessage For="@(() => alumno.Nombre)" />
+    </div>
 
-    </footer>
+    <div class="form-group">
+        <label>Apellido</label>
+        <InputText class="form-control" @bind-Value="alumno.Apellido" />
+        <ValidationMessage For="@(() => alumno.Apellido)" />
+    </div>
 
-</body>
-</html>
+    <div class="form-group">
+        <label>Documento</label>
+        <InputText class="form-control" @bind-Value="alumno.Documento" />
+        <ValidationMessage For="@(() => alumno.Documento)" />
+    </div>
+
+    <div class="form-group">
+        <label for="TipoDocumentoId">Tipo de Documento</label>
+        <InputSelect class="form-control" id="TipoDocumentoId" @bind-Value="alumno.TipoDocumentoId">
+            <option value="">Seleccione...</option>
+            @foreach (var tipo in tiposDocumentos)
+            {
+                <option value="@tipo.Id">@tipo.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Teléfono</label>
+        <InputText class="form-control" @bind-Value="alumno.Telefono" />
+        <ValidationMessage For="@(() => alumno.Telefono)" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Domicilio</label>
+        <InputText class="form-control" @bind-Value="alumno.Domicilio" />
+        <ValidationMessage For="@(() => alumno.Domicilio)" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Email</label>
+        <InputText class="form-control" @bind-Value="alumno.Email" />
+        <ValidationMessage For="@(() => alumno.Email)" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Contraseña</label>
+        <InputText class="form-control" @bind-Value="alumno.Contrasena" />
+        <ValidationMessage For="@(() => alumno.Contrasena)" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Sexo</label>
+        <InputText class="form-control" @bind-Value="alumno.Sexo" />
+        <ValidationMessage For="@(() => alumno.Sexo)" />
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de nacimiento</label>
+        <InputDate class="form-control" @bind-Value="alumno.FechaNacimiento" />
+        <ValidationMessage For="@(() => alumno.FechaNacimiento)" />
+    </div>
+
+    <div class="form-group">
+        <label>Edad</label>
+        <InputNumber class="form-control" @bind-Value="alumno.Edad" />
+        <ValidationMessage For="@(() => alumno.Edad)" />
+    </div>
+
+
+    <div class="form-group">
+        <label>CUIL</label>
+        <InputText class="form-control" @bind-Value="alumno.CUIL" />
+        <ValidationMessage For="@(() => alumno.CUIL)" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Pais</label>
+        <InputText class="form-control" @bind-Value="alumno.Pais" />
+        <ValidationMessage For="@(() => alumno.Pais)" />
+    </div>
+
+    <div class="form-group">
+        <label>Provincia</label>
+        <InputText class="form-control" @bind-Value="alumno.Provincia" />
+        <ValidationMessage For="@(() => alumno.Provincia)" />
+    </div>
+
+    <div class="form-group">
+        <label>Departamento</label>
+        <InputText class="form-control" @bind-Value="alumno.Departamento" />
+        <ValidationMessage For="@(() => alumno.Departamento)" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Titulo Base</label>
+        <InputText class="form-control" @bind-Value="alumno.TituloBase" />
+        <ValidationMessage For="@(() => alumno.TituloBase)" />
+    </div>
+
+    <!-- Agregando los Checkboxes para los trámites -->
+    <div class="form-group">
+        <label for="TieneFotocopiaDNI">Fotocopia de DNI</label>
+        <InputCheckbox class="form-check-input" id="TieneFotocopiaDNI" @bind-Value="FotocopiaDNIBool" />
+    </div>
+
+    <div class="form-group">
+        <label for="TieneConstanciaCUIL">Constancia CUIL</label>
+        <InputCheckbox class="form-check-input" id="TieneConstanciaCUIL" @bind-Value="ConstanciaCUILBool" />
+    </div>
+
+    <div class="form-group">
+        <label for="TienePartidaNacimiento">Partida de Nacimiento</label>
+        <InputCheckbox class="form-check-input" id="TienePartidaNacimiento" @bind-Value="PartidaNacimientoBool" />
+    </div>
+
+    <div class="form-group">
+        <label for="TieneAnalitico">Analítico</label>
+        <InputCheckbox class="form-check-input" id="TieneAnalitico" @bind-Value="AnaliticoBool" />
+    </div>
+
+    <div class="form-group">
+        <label for="TieneFotoCarnet">Foto Carnet</label>
+        <InputCheckbox class="form-check-input" id="TieneFotoCarnet" @bind-Value="FotoCarnetBool" />
+    </div>
+
+    <div class="form-group">
+        <label for="TieneCUS">CUS</label>
+        <InputCheckbox class="form-check-input" id="TieneCUS" @bind-Value="CUSBool" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Aceptar</button>
+    <button class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+</EditForm>
+
+<Confirmacion @ref="confirmacion"
+              Titulo="¡Genial!"
+              textCancelar="Cerrar"
+              onConfirm="Cancelar">
+    <h4>¡Acabas de matricularte!</h4>
+    <br>
+    <p>Pulsa aceptar para continuar</p>
+</Confirmacion>
 
 @code {
-    private Alumno NuevoAlumno = new Alumno();
+    private CrearAlumnoDTO alumno = new CrearAlumnoDTO();
+    private List<Carrera> carreras = new List<Carrera>();
+    private List<TipoDocumento> tiposDocumentos = new List<TipoDocumento>();
+    Confirmacion confirmacion;
+
+    private bool FotocopiaDNIBool
+    {
+        get => alumno.FotocopiaDNI == "Sí";
+        set => alumno.FotocopiaDNI = value ? "Sí" : "No";
+    }
+
+    private bool ConstanciaCUILBool
+    {
+        get => alumno.ConstanciaCUIL == "Sí";
+        set => alumno.ConstanciaCUIL = value ? "Sí" : "No";
+    }
+
+    private bool PartidaNacimientoBool
+    {
+        get => alumno.PartidaNacimiento == "Sí";
+        set => alumno.PartidaNacimiento = value ? "Sí" : "No";
+    }
+
+    private bool AnaliticoBool
+    {
+        get => alumno.Analitico == "Sí";
+        set => alumno.Analitico = value ? "Sí" : "No";
+    }
+
+    private bool FotoCarnetBool
+    {
+        get => alumno.FotoCarnet == "Sí";
+        set => alumno.FotoCarnet = value ? "Sí" : "No";
+    }
+
+    private bool CUSBool
+    {
+        get => alumno.CUS == "Sí";
+        set => alumno.CUS = value ? "Sí" : "No";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Cargar las listas para que aparezcan
+        var httpRespuestaCarreras = await http.Get<List<Carrera>>("api/Carrera");
+        if (!httpRespuestaCarreras.Error)
+        {
+            carreras = httpRespuestaCarreras.respuesta;
+        }
+
+        // Cargar las listas para que aparezcan
+        var httpRespuestaTiposDocumentos = await http.Get<List<TipoDocumento>>("api/TipoDocumento");
+        if (!httpRespuestaTiposDocumentos.Error)
+        {
+            tiposDocumentos = httpRespuestaTiposDocumentos.respuesta;
+        }
+    }
 
     private async Task Grabar()
     {
-        var httpRespuesta = await http.Post<Alumno>("api/Alumnos", NuevoAlumno);
+        // Crear un DTO combinado para enviar todo en un solo POST
+        var entidadDTO = new CrearAlumnoDTO
+            {
+                Nombre = alumno.Nombre,
+                Apellido = alumno.Apellido,
+                Documento = alumno.Documento,
+                TipoDocumentoId = alumno.TipoDocumentoId,
+                Domicilio = alumno.Domicilio,
+                Telefono = alumno.Telefono,
+                Email = alumno.Email,
+                Contrasena = alumno.Contrasena,
+                Sexo = alumno.Sexo,
+                FechaNacimiento = alumno.FechaNacimiento,
+                Edad = alumno.Edad,
+                CUIL = alumno.CUIL,
+                Pais = alumno.Pais,
+                Provincia = alumno.Provincia,
+                Departamento = alumno.Departamento,
+                CarreraId = alumno.CarreraId,
+                TituloBase = alumno.TituloBase,
+                Estado = true,
+                FotocopiaDNI = alumno.FotocopiaDNI,
+                ConstanciaCUIL = alumno.ConstanciaCUIL,
+                PartidaNacimiento = alumno.PartidaNacimiento,
+                Analitico = alumno.Analitico,
+                FotoCarnet = alumno.FotoCarnet,
+                CUS = alumno.CUS
+            };
 
-        if (httpRespuesta.Error)
+
+        try
         {
-            var body = httpRespuesta.HttpResponseMessage;
+            var response = await _http.PostAsJsonAsync("api/Alumnos", entidadDTO);
+            var responseText = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Respuesta de la API: {responseText}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                StateHasChanged();
+                confirmacion.Ver();
+            }
+            else
+            {
+                Console.WriteLine($"Error en la API: {response.StatusCode}");
+            }
+
         }
-        NavigationManager.NavigateTo("/api/Alumnos");
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+        }
     }
+
 
     private void Cancelar()
     {
-        NavigationManager.NavigateTo("/api/Alumnos");
+        navigationManager.NavigateTo("/");
     }
 }

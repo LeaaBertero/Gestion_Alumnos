@@ -39,7 +39,7 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
 
         
         [Required(ErrorMessage = "Ingrese la fecha de nacimiento")]
-        public DateOnly FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         
 
         
@@ -50,7 +50,7 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         
         [Required(ErrorMessage = "Ingrese el  Nro  de Cuil")]
         [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string CUIL { get; set; } //modificado con signo de pregunta
+        public string? CUIL { get; set; } //modificado con signo de pregunta
         
 
         [Required(ErrorMessage = "Nacionalidad")]
@@ -61,6 +61,10 @@ namespace Proyecto_Alumnos.BD.Data.Entidades
         [Required(ErrorMessage = "Provincia")]
         [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
         public string Provincia { get; set; } //modificacion con signo de pregunta
+
+        [Required(ErrorMessage = "El departamento es obligatorio")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        public string? Departamento { get; set; }
 
 
         [Required(ErrorMessage = "Titulo Base")] //corregir el titulo

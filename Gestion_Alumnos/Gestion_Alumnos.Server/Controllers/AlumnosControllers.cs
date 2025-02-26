@@ -14,13 +14,19 @@ namespace Gestion_Alumnos.Server.Controllers
     {
         private readonly IAlumnoRepositorio repositorio;
         private readonly IMapper mapper;
+        private readonly IPersonaRepositorio personaRepositorio;
+        private readonly IUsuarioRepositorio usuarioRepositorio;
+        private readonly Context context;
 
         //constructor
         #region constructor
-        public AlumnosControllers(IAlumnoRepositorio repositorio, IMapper mapper)
+        public AlumnosControllers(IAlumnoRepositorio repositorio, IMapper mapper, IPersonaRepositorio personaRepositorio, IUsuarioRepositorio usuarioRepositorio, Context context)
         {
             this.repositorio = repositorio;
             this.mapper = mapper;
+            this.personaRepositorio = personaRepositorio;
+            this.usuarioRepositorio = usuarioRepositorio;
+            this.context = context;
         }
         #endregion
 
@@ -36,18 +42,68 @@ namespace Gestion_Alumnos.Server.Controllers
         //Método Post
         #region Post
         [HttpPost]
-        public async Task<ActionResult<int>>Post(CrearAlumnoDTO entidadDTO) 
+        public async Task<ActionResult<int>> Post(CrearAlumnoDTO entidadDTO)
         {
-            try
-            {             
-                Alumno entidad = mapper.Map<Alumno>(entidadDTO);
-                                             
-                return await repositorio.Insert(entidad);
-            }
-            catch (Exception err)
+            using (var transaction = await context.Database.BeginTransactionAsync())
             {
+                try
+                {
+                    PrepararDatosAntesDeGuardar(entidadDTO);
 
-                return BadRequest(err.Message);
+                    // Crear la persona
+                    var persona = new Persona
+                    {
+                        Nombre = entidadDTO.Nombre,
+                        Apellido = entidadDTO.Apellido,
+                        Documento = entidadDTO.Documento,
+                        TipoDocumentoId = entidadDTO.TipoDocumentoId,
+                        Domicilio = entidadDTO.Domicilio,
+                        Telefono = entidadDTO.Telefono
+                    };
+
+                    await personaRepositorio.Insert(persona);
+
+                    // Crear el usuario
+                    var crearUsuarioDto = new CrearUsuarioDTO
+                    {
+                        Email = entidadDTO.Email,
+                        Contrasena = entidadDTO.Contrasena
+                    };
+
+                    var usuario = new Usuario
+                    {
+                        Email = crearUsuarioDto.Email,
+                        Contrasena = crearUsuarioDto.Contrasena,
+                        PersonaId = persona.Id
+                    };
+
+                    await usuarioRepositorio.Insert(usuario);
+
+                    // Crear el alumno
+                    var alumno = mapper.Map<Alumno>(entidadDTO);
+
+                    alumno.UsuarioId = usuario.Id;
+                    alumno.Nombre = entidadDTO.Nombre;
+                    alumno.Pais = entidadDTO.Pais;
+                    alumno.Provincia = entidadDTO.Provincia;
+                    alumno.Departamento = entidadDTO.Departamento;
+                    alumno.CarreraId = entidadDTO.CarreraId;
+                    alumno.FechaNacimiento = entidadDTO.FechaNacimiento;
+                    alumno.Sexo = entidadDTO.Sexo;
+                    alumno.Edad = entidadDTO.Edad;
+                    alumno.CUIL = entidadDTO.CUIL;
+
+                    await repositorio.Insert(alumno);
+
+                    // Hacer commit de la transacción si todo fue exitoso
+                    await transaction.CommitAsync();
+
+                    return Ok(new { mensaje = "Alumno creado con éxito", alumno });
+                }
+                catch (DbUpdateException ex)
+                {
+                    return BadRequest($"Error al guardar: {ex.InnerException?.Message ?? ex.Message}");
+                }
             }
         }
         #endregion
@@ -69,6 +125,17 @@ namespace Gestion_Alumnos.Server.Controllers
             return Ok(pepe);
         }
         #endregion
+
+        private void PrepararDatosAntesDeGuardar(CrearAlumnoDTO alumnoDTO)
+        {
+
+            alumnoDTO.FotocopiaDNI = alumnoDTO.FotocopiaDNI == null ? "No" : alumnoDTO.FotocopiaDNI;
+            alumnoDTO.ConstanciaCUIL = alumnoDTO.ConstanciaCUIL == null ? "No" : alumnoDTO.ConstanciaCUIL;
+            alumnoDTO.PartidaNacimiento = alumnoDTO.PartidaNacimiento == null ? "No" : alumnoDTO.PartidaNacimiento;
+            alumnoDTO.Analitico = alumnoDTO.Analitico == null ? "No" : alumnoDTO.Analitico;
+            alumnoDTO.FotoCarnet = alumnoDTO.FotoCarnet == null ? "No" : alumnoDTO.FotoCarnet;
+            alumnoDTO.CUS = alumnoDTO.CUS == null ? "No" : alumnoDTO.CUS;
+        }
 
     }
 }

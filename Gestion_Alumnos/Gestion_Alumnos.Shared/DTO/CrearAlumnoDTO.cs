@@ -9,73 +9,90 @@ namespace Gestion_Alumnos.Shared.DTO
 {
     public class CrearAlumnoDTO
     {
-        [Required(ErrorMessage = "El nombre es obligatorio")]
-        [MaxLength(50, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string Nombre { get; set; } //modificado con signo de pregunta
+        public int CarreraId { get; set; }
+        
+        [Required(ErrorMessage = "El nombre de la persona es necesario")]
+        [MaxLength(80, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "El apellido de la persona es necesario")]
+        [MaxLength(80, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Apellido { get; set; }
+
+        [Required(ErrorMessage = "El número de documento de la persona es necesario")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Documento { get; set; }
+
+        [Required(ErrorMessage = "El tipo de documento es necesario")]
+        public int TipoDocumentoId { get; set; }
+
+        [Required(ErrorMessage = "El número de telefono de la persona es necesario")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Telefono { get; set; }
+
+        [Required(ErrorMessage = "El Domicilio de la persona es necesario")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Domicilio { get; set; }
 
 
-        [Required(ErrorMessage = "Sexo")]
-        [MaxLength(20, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string Sexo { get; set; } //modificado con signo de pregunta
 
+        // Datos de Usuario
+        [Required(ErrorMessage = "El email de la persona es necesario")]
+        [MaxLength(80, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Email { get; set; }
 
+        [Required(ErrorMessage = "El nombre de usuario de la persona es necesario")]
+        [MaxLength(80, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Contrasena { get; set; } = "DefaultPassword123";
 
-        [Required(ErrorMessage = "Ingrese la fecha de nacimiento")]
-        public DateOnly FechaNacimiento { get; set; }
+        // Datos específicos del Alumno
+        [Required(ErrorMessage = "El sexo del alumno es necesario")]
+        [MaxLength(20, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string Sexo { get; set; }
 
+        [Required(ErrorMessage = "La fecha de nacimiento del alumno es necesario")]
+        public DateTime FechaNacimiento { get; set; }
 
-
-        [Required(ErrorMessage = "Ingrese la edad")]
+        [Required(ErrorMessage = "La edad del alumno es necesario")]
         public int Edad { get; set; }
 
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string? CUIL { get; set; }
+
+        [Required(ErrorMessage = "El país de nacimiento del alumno es necesario")]
+        public string Pais { get; set; }
+
+        [Required(ErrorMessage = "La provincia de nacimiento del alumno es necesario")]
+        public string Provincia { get; set; }
+
+        [Required(ErrorMessage = "El departamento de nacimiento del alumno es necesario")]
+        public string Departamento { get; set; }
 
 
-        [Required(ErrorMessage = "Ingrese el  Nro  de Cuil")]
-        [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string CUIL { get; set; } //modificado con signo de pregunta
+        // Otros campos opcionales
+        [MaxLength(60, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string? TituloBase { get; set; }
 
-
-        [Required(ErrorMessage = "Nacionalidad")]
-        [MaxLength(30, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string Pais { get; set; } //modificado con signo de pregunta
-
-
-        [Required(ErrorMessage = "Provincia")]
-        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string Provincia { get; set; } //modificacion con signo de pregunta
-
-
-        [Required(ErrorMessage = "Titulo Base")] //corregir el titulo
-        [MaxLength(60, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string TituloBase { get; set; }
-
-        [Required(ErrorMessage = "Dato obligatorio")]
-        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
         public string? FotocopiaDNI { get; set; }
 
-        [Required(ErrorMessage = "El campo constancia es obligatorio")]
-        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string? ConstanciaCUIL { get; set; } //esto es para indicar que el alumno trajo o mandó un documento virtual de la constancia de CUIL, no tiene que ver con el atributo "CUIL", el cual es el cuil real.
+        [MaxLength(16, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string? ConstanciaCUIL { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {100}.")]
         public string? PartidaNacimiento { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string Analitico { get; set; }
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string? Analitico { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio")]
-        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {100}.")]
         public string? FotoCarnet { get; set; }
 
+        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {100}.")]
+        public string? CUS { get; set; }
+
         [Required(ErrorMessage = "Dato obligatorio")]
-        [MaxLength(40, ErrorMessage = "Máximo número de caracteres {1}.")]
-        public string CUS { get; set; }
-
-
-        [Required(ErrorMessage = "El estado del alumno es obligatorio")]
-        public string Estado { get; set; } //modificado con signo de pregunta
+        public bool Estado { get; set; }
 
     }
 }

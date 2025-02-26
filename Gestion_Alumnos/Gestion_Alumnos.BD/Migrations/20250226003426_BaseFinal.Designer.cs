@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion_Alumnos.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250215192646_inicio")]
-    partial class inicio
+    [Migration("20250226003426_BaseFinal")]
+    partial class BaseFinal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,11 @@ namespace Gestion_Alumnos.BD.Migrations
                         .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
 
+                    b.Property<string>("Departamento")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
                     b.Property<int>("Edad")
                         .HasColumnType("int");
 
@@ -63,8 +68,8 @@ namespace Gestion_Alumnos.BD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("FechaNacimiento")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FotoCarnet")
                         .IsRequired()
