@@ -1,7 +1,7 @@
 ﻿@page "/Nosotros"
 @inject IHttpServicio http
 
-<!DOCTYPE html>
+@* <!DOCTYPE html>
     <html>
     <head>
         <title>Nosotros</title>
@@ -21,6 +21,89 @@
         </footer>
     
     </body>
-    </html>
+    </html> *@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nosotros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #343a40;
+            color: #dc3545;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #343a40;
+        }
+
+        p {
+            color: #555555;
+            line-height: 1.6;
+        }
+
+        .mission {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-left: 5px solid #dc3545;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nosotros</h1>
+    </header>
+
+    <main>
+        <div class="content">
+            <h2>Sobre Nosotros</h2>
+            <p>Bienvenidos a nuestro instituto terciario, donde la excelencia académica y la formación integral son nuestras prioridades. Nos especializamos en una amplia variedad de carreras, siendo el desarrollo de software una de las más concurridas y reconocidas.</p>
+            <div class="mission">
+                <h3>Nuestra Misión</h3>
+                <p>Formar profesionales competentes y éticos, capaces de afrontar los desafíos del mundo laboral actual con innovación y liderazgo. Fomentamos el pensamiento crítico, la creatividad y el aprendizaje continuo.</p>
+            </div>
+            <h3>Historia</h3>
+            <p>Fundado en 1990, nuestro instituto ha crecido y evolucionado para adaptarse a las demandas del siglo XXI, ofreciendo programas de alta calidad y estableciendo alianzas con empresas líderes en la industria.</p>
+            <h3>Nuestros Valores</h3>
+            <p>Compromiso, integridad, y trabajo en equipo son los pilares que guían nuestras acciones y decisiones.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Todos los derechos reservados &copy; 2025</p>
+    </footer>
+</body>
+</html>
+
 
 
